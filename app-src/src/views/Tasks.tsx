@@ -6,48 +6,30 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { PlusIcon } from 'lucide-react';
 import { StatePill } from '../components/StatePill';
 import { BoardProgress, StateRail } from '../components/Diagrams';
-import { createTask, signOffTask, useErgon } from '../data/store';
+import { HoldToSend } from '../components/HoldToSend';
+import { createTask, denySignOff, signOffTask, useErgon } from '../data/store';
 import type { Task, TaskState } from '../data/fixtures';
 import { dur, ease } from '../motion';
 
 const COLUMNS: { id: TaskState; label: string; note: string }[] = [
-  { id: 'waiting', label: 'Needs your decision', note: 'the inbox · one tap turns each' },
+  { id: 'waiting', label: 'Needs your decision', note: 'the inbox · hold to confirm each' },
   { id: 'working', label: 'In progress', note: 'your agent is on it' },
   { id: 'done', label: 'Done today', note: 'tracked, quiet' },
 ];
 
 const ENTER = { duration: dur.enter, ease } as const;
 
-/** A waiting task is a REAL CONTROL IN PLACE on both faces (round-7 blocking fix): role, tab order and
- *  a handler that signs it off through the same store the morning brief, the Tasks badge and the
- *  Decisions inbox derive from. Working and done cards are informational and get no control. */
-function taskActionProps(task: Task) {
-  if (task.state !== 'waiting') return {};
-  return {
-    role: 'button' as const,
-    tabIndex: 0,
-    'aria-label': `Sign off ${task.title} — waiting on your decision`,
-    onClick: () => signOffTask(task.id),
-    onKeyDown: (event: React.KeyboardEvent) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        signOffTask(task.id);
-      }
-    },
-  };
-}
-
-/** The visible affordance inside a waiting card. It is presentation only (aria-hidden): the card is
- *  the control, so a tap anywhere on the card — including this label — signs the task off in place. */
-function SignOffRow({ task }: { task: Task }) {
-  // F1 (round-7 fresh-eye review): the top StatePill already says "waiting on you" and the body
-  // already says what the agent is waiting for. The bottom row carries ONE white primary — the
-  // action itself — so the card does not print the same state a third time. The card remains the
-  // in-place control (role=button/tabindex/handlers above), so the label is not the affordance.
+/** A waiting task is NOT a tap target: signing it off is a consequential act, so it goes through the
+ *  same hold-to-confirm gate as every other one (a tap cannot commit; Deny records and changes
+ *  nothing). The card itself carries no handler and is not in the tab order. */
+function SignOffGate({ task }: { task: Task }) {
   return (
-    <span className="task-signoff-row" aria-hidden="true">
-      <span className="task-signoff-btn" data-testid={`task-signoff-${task.id}`}>Sign off</span>
-    </span>
+    <div className="task-gate" data-testid={`task-gate-${task.id}`}>
+      <HoldToSend label="Hold to sign off" committedLabel="Signed off" onCommit={() => signOffTask(task.id)} />
+      <button type="button" className="btn-quiet deny" data-testid={`task-deny-${task.id}`} onClick={() => denySignOff(task.id)}>
+        Deny
+      </button>
+    </div>
   );
 }
 
@@ -125,8 +107,7 @@ export function Tasks({ compact = false }: { compact?: boolean }) {
             <motion.li
               layout={!reduce}
               key={t.id}
-              {...taskActionProps(t)}
-              className={`m-card state-${t.state}${t.state === 'waiting' ? ' actionable' : ''}`}
+              className={`m-card state-${t.state}`}
               data-testid={`task-${t.id}`}
               data-actionable={t.state === 'waiting' ? '1' : '0'}
               initial={reduce ? false : { opacity: 0, y: 6 }}
@@ -140,7 +121,7 @@ export function Tasks({ compact = false }: { compact?: boolean }) {
               </div>
               <p className="meta"><span className="mono">{t.id}</span> · owner: your agent</p>
               <p className="last">{t.last}</p>
-              {t.state === 'waiting' ? <SignOffRow task={t} /> : null}
+              {t.state === 'waiting' ? <SignOffGate task={t} /> : null}
             </motion.li>
           )))}
         </ul>
@@ -172,8 +153,7 @@ export function Tasks({ compact = false }: { compact?: boolean }) {
                   <motion.article
                     layout={!reduce}
                     key={t.id}
-                    {...taskActionProps(t)}
-                    className={`task-card state-${t.state}${t.state === 'waiting' ? ' actionable' : ''}`}
+                    className={`task-card state-${t.state}`}
                     data-testid={`task-${t.id}`}
                     data-actionable={t.state === 'waiting' ? '1' : '0'}
                     initial={reduce ? false : { opacity: 0, y: 8 }}
@@ -188,7 +168,7 @@ export function Tasks({ compact = false }: { compact?: boolean }) {
                     </div>
                     <p className="meta"><span className="mono">{t.id}</span> · owner: your agent</p>
                     <p className="last">{t.last}</p>
-                    {t.state === 'waiting' ? <SignOffRow task={t} /> : null}
+                    {t.state === 'waiting' ? <SignOffGate task={t} /> : null}
                   </motion.article>
                 ))}
               </AnimatePresence>

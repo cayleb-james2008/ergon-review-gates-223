@@ -274,6 +274,46 @@ body > div.backdrop-blur-xs {
 .hold-fill { display: block; height: 100%; background: var(--eg-ok); transform-origin: left center; transform: scaleX(0); }
 .hold-hint { font-size: 11px; color: var(--eg-subtle); }
 
+/* ---- review gates: one small purpose-built card per consequential act. A tap cannot confirm; the
+   hold (or Deny) closes the card in place with the recorded decision. ---- */
+.gate-card {
+  margin-top: 7px; padding: 9px 10px;
+  border: 1px solid var(--eg-line); border-left: 2px solid var(--eg-warn);
+  border-radius: var(--eg-radius-panel); background: var(--eg-panel);
+}
+.gate-card.approved { border-left-color: var(--eg-ok); }
+.gate-card.denied { border-left-color: var(--eg-danger); }
+.gate-head { display: flex; align-items: center; gap: 6px; }
+.gate-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5px; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--eg-warn); }
+.gate-card.approved .gate-tag { color: var(--eg-ok); }
+.gate-card.denied .gate-tag { color: var(--eg-danger); }
+.gate-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--eg-warn); flex: none; }
+.gate-card.approved .gate-dot { background: var(--eg-ok); }
+.gate-card.denied .gate-dot { background: var(--eg-danger); }
+.gate-title { margin-top: 5px; font-size: 13px; font-weight: 550; line-height: 1.35; color: var(--eg-ink); }
+.gate-fields { margin-top: 6px; display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--eg-line); }
+.gate-fields > div { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-bottom: 1px solid var(--eg-line); }
+.gate-fields dt { flex: none; font-size: 9.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--eg-muted); }
+.gate-fields dd { min-width: 0; font-size: 10.5px; text-align: right; color: var(--eg-ink); overflow-wrap: anywhere; }
+.gate-actions { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-top: 9px; }
+.gate-actions .hold-wrap { flex: 0 1 auto; }
+.gate-outcome { display: flex; align-items: center; gap: 7px; margin-top: 8px; padding: 6px 8px;
+  border: 1px solid var(--eg-line); border-radius: var(--eg-radius-control); background: var(--eg-raise);
+  font-size: 11.5px; color: var(--eg-muted); }
+.gate-outcome.approved { border-color: var(--eg-ok); }
+.gate-outcome.denied { border-color: var(--eg-danger); }
+.gate-outcome strong { font-weight: 550; color: var(--eg-ink); }
+.gate-note { margin-top: 7px; font-size: 10px; color: var(--eg-subtle); line-height: 1.45; }
+
+/* ---- the AUTO half: the agent's own work, logged beside the thread ---- */
+.auto-log { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; margin-top: 8px;
+  padding: 6px 9px; border: 1px solid var(--eg-line); border-radius: var(--eg-radius-panel);
+  background: var(--eg-panel); font-size: 10.5px; color: var(--eg-muted); }
+.auto-log-tag { font-size: 9.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--eg-ok); }
+.auto-log-text { flex: 1 1 auto; min-width: 0; }
+.auto-log-note { font-size: 9.5px; color: var(--eg-subtle); }
+
 /* ---- outcome strip ---- */
 .outcome-strip {
   animation: settle-in var(--eg-motion-swap) var(--eg-ease);
@@ -383,15 +423,10 @@ body > div.backdrop-blur-xs {
 .task-card h4 { font-size: 13px; font-weight: 500; line-height: 1.4; }
 .task-card .meta { font-size: 11px; color: var(--eg-muted); margin-top: 5px; }
 .task-card .last { font-size: 12px; color: var(--eg-ink); margin-top: 3px; }
-/* a waiting task IS the in-place control (round-7 blocking fix); colour is still state only */
-.task-card.actionable, .m-card.actionable { cursor: pointer; }
-.task-card.actionable:hover, .m-card.actionable:hover { border-color: var(--eg-warn); }
-.task-card.actionable:active, .m-card.actionable:active { background: var(--eg-warn-wash); }
-.task-signoff-row { display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+/* signing a waiting task off is a HOLD gate: the card is not a tap target (the act is consequential) */
+.task-gate { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;
   margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--eg-line); }
-.task-signoff-btn { display: inline-flex; align-items: center; justify-content: center; height: 28px;
-  padding: 0 11px; background: var(--eg-accent); color: var(--eg-on-accent);
-  border: 1px solid var(--eg-accent); border-radius: var(--eg-radius-control); font-size: 12px; font-weight: 550; }
+.task-gate .hold-wrap { flex: 0 1 auto; }
 .empty-col { font-size: 12px; color: var(--eg-subtle); padding: 6px 2px; }
 
 /* ---- decisions ---- */

@@ -9,13 +9,16 @@
 import { useSyncExternalStore } from 'react';
 import {
   BRIEF, DEFAULT_SETTINGS, DEMO_NOW, SEED_APPROVALS, SEED_DECISIONS, SEED_TASKS, SEED_THREAD,
-  fixtureReply, type Approval, type Decision, type DecisionOutcome, type Msg, type Settings, type Task,
+  fixtureReply, type Approval, type Decision, type DecisionOutcome, type GateCardView, type GateKind,
+  type Msg, type Settings, type Task,
 } from './fixtures';
 import { DEMO_CALL, DEMO_JOB, DEMO_ROLE, DEMO_ROLE_MAP, DEMO_SKILL_MANIFEST, DEMO_THREAD_START } from './demo';
 
 const KEY = 'rhl.warehouse-demo.v1';
 
 export type Notice = { id: string; title: string; body: string; at: number };
+/** One act the agent took on its own (the AUTO half of the audit): logged, no gate. */
+export type AutoAct = { id: string; text: string; at: number };
 
 export type State = {
   version: 1;
@@ -26,6 +29,7 @@ export type State = {
   settings: Settings;
   lastOutcome: { decision: Decision; at: number } | null;
   notice?: Notice | null;
+  autoLog: AutoAct[];
   draft?: never;
 };
 
@@ -45,6 +49,7 @@ function seed(): State {
     settings: DEFAULT_SETTINGS,
     lastOutcome: null,
     notice: null,
+    autoLog: [],
   };
 }
 
@@ -67,6 +72,7 @@ function seedDemo(): State {
     settings: { ...DEFAULT_SETTINGS, displayName: 'Warehouse demo' },
     lastOutcome: null,
     notice: null,
+    autoLog: [],
   };
 }
 
@@ -86,6 +92,7 @@ function read(): State {
       settings: { ...DEFAULT_SETTINGS, ...(parsed.settings || {}) },
       lastOutcome: parsed.lastOutcome ?? null,
       notice: parsed.notice ?? null,
+      autoLog: Array.isArray(parsed.autoLog) ? parsed.autoLog : [],
     };
   } catch {
     return seed();
@@ -172,6 +179,11 @@ export function agentIsReplying(): boolean {
 
 
 // ---------------------------------------------------------------- demo runtime (RHL showcase)
+//
+// The agent works hands-off in the demo (drafts, reads, prepares, replies — the AUTO half). Every
+// consequential act it prepares is held at a review gate: nothing changes until the employee confirms
+// the in-thread card with a ~0.9 s hold (a tap cannot confirm), or the act is dropped on Deny. The gate
+// state lives on the message and persists with it, so a reload never re-fires an act.
 
 let demoPending = 0;
 const demoStarted = { call: false, board: false, skill: false, skillBusy: false };
@@ -197,9 +209,176 @@ function notify(title: string, body: string) {
   setTimeout(() => { if (getState().notice?.id === n.id) commit({ ...getState(), notice: null }); }, 9000);
 }
 
-function startDemoCall() {
+// ---- AUTO actions: the agent's own work, logged beside the thread, no confirmation needed ----
+
+function auto(text: string) {
+  const act: AutoAct = { id: id('a'), text, at: now() };
+  commit({ ...state, autoLog: [act, ...state.autoLog].slice(0, 5) });
+}
+
+// ---- review gates: the GATED class ----
+
+function gateCards(kind: GateKind): GateCardView[] {
+  return state.messages
+    .map((m) => (m.card?.kind === 'gate' && m.card.gate === kind ? m.card : null))
+    .filter((c): c is GateCardView => c !== null);
+}
+const pendingGate = (kind: GateKind) => gateCards(kind).some((c) => c.state === 'pending');
+const gateApproved = (kind: GateKind) => gateCards(kind).some((c) => c.state === 'approved');
+
+/** An in-thread review gate: the act the agent prepared, its exact consequences, and a control that
+ *  only commits on a hold. Nothing is executed by this function. */
+function pushGate(
+  kind: GateKind,
+  text: string,
+  body: Pick<GateCardView, 'title' | 'fields' | 'note'>,
+  payload?: Record<string, string>,
+) {
+  return pushDemo({
+    from: 'agent', tag: 'needs-you', text,
+    card: { kind: 'gate', gate: kind, state: 'pending', ...body, payload },
+  });
+}
+
+function gateDecision(messageId: string, card: GateCardView, outcome: DecisionOutcome): Decision {
+  const at = now();
+  return {
+    id: decisionId(state.decisions.length),
+    approvalId: messageId,
+    title: card.title,
+    scope: `review gate · ${card.gate}`,
+    outcome,
+    at,
+    note: `you · ${new Date(at).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`,
+    kind: 'gate',
+  };
+}
+
+/** Confirm a pending gate: record the decision, close the card with the outcome, then (and only then)
+ *  run the act. Exactly once: a card that is not pending is ignored, and the act's own guards hold. */
+export function approveGate(messageId: string) {
+  const m = state.messages.find((x) => x.id === messageId);
+  const card = m?.card;
+  if (!card || card.kind !== 'gate' || card.state !== 'pending') return;
+  const decision = gateDecision(messageId, card, 'approved');
+  commit({
+    ...state,
+    messages: state.messages.map((x) => (x.id === messageId
+      ? { ...x, card: { ...card, state: 'approved', decisionId: decision.id } }
+      : x)),
+    decisions: [decision, ...state.decisions],
+    lastOutcome: { decision, at: decision.at },
+  });
+  runGate(card);
+}
+
+/** Deny a pending gate: record the denial and change nothing. Every kind can be re-proposed by asking
+ *  again, so a denial never strands the run. */
+export function denyGate(messageId: string) {
+  const m = state.messages.find((x) => x.id === messageId);
+  const card = m?.card;
+  if (!card || card.kind !== 'gate' || card.state !== 'pending') return;
+  const decision = gateDecision(messageId, card, 'denied');
+  commit({
+    ...state,
+    messages: state.messages.map((x) => (x.id === messageId
+      ? { ...x, card: { ...card, state: 'denied', decisionId: decision.id } }
+      : x)),
+    decisions: [decision, ...state.decisions],
+    lastOutcome: { decision, at: decision.at },
+  });
+  const line: Record<GateKind, string> = {
+    call: 'Denied — no call was placed and no booking exists. Say “call them” again and I will re-propose it.',
+    board: 'Denied — nothing was written and line F is unchanged. Say “add this job to line F” again and I will re-propose it.',
+    skill: 'Denied — nothing was published. Say “save it as a skill” again and I will re-propose it.',
+    signoff: 'Denied — T-2201 stays waiting on you. Say “sign it off” again and I will re-propose it.',
+  };
+  agentSays(400, line[card.gate]);
+}
+
+/** The act itself — reached only from approveGate, after the decision is recorded. */
+function runGate(card: GateCardView) {
+  if (card.gate === 'call') { runDemoCall(); return; }
+  if (card.gate === 'board') { runBoardWrite(card.payload?.line || DEMO_JOB.line); return; }
+  if (card.gate === 'skill') { void runSkillPublish(); return; }
+  const done = completeTask(card.payload?.task || 'T-2201');
+  agentSays(300, done ? 'Signed off — T-2201 is done, and the decision is in your inbox.' : 'That task was already signed off.');
+}
+
+// ---- what the agent prepares, and proposes as a gate ----
+
+function proposeCall() {
+  if (pendingGate('call')) { agentSays(300, 'The call card is still waiting above — hold it to confirm.'); return; }
+  if (gateApproved('call')) { agentSays(300, 'That call is already done — the booking is on the job card.'); return; }
+  auto('drafted the call script and the call notes');
+  pushGate('call', 'Here is the call, ready to go. Nothing is placed until you confirm — hold the card; a tap does nothing.', {
+    title: `Place the call — ${DEMO_CALL.callee}`,
+    fields: [
+      { label: 'Calling', value: DEMO_CALL.callee },
+      { label: 'Purpose', value: 'Book the Bay C concrete dump' },
+      { label: 'Window', value: 'Tomorrow, 07:30' },
+    ],
+    note: 'External act: a scripted demo transcript (no telephony) and it commits the booking. Demo data only.',
+  });
+}
+
+function proposeSignOff() {
+  const task = state.tasks.find((t) => t.id === 'T-2201');
+  if (!task || task.state !== 'waiting') return;
+  if (pendingGate('signoff')) { agentSays(300, 'The sign-off card is still waiting above — hold it to confirm.'); return; }
+  if (gateApproved('signoff')) { agentSays(300, 'T-2201 is already signed off.'); return; }
+  auto('prepared the sign-off summary for T-2201');
+  pushGate('signoff', 'The booking is done. T-2201 is waiting on your sign-off — hold the card to release it.', {
+    title: `Sign off T-2201 — ${task.title}`,
+    fields: [
+      { label: 'Task', value: `${task.id} · ${task.title}` },
+      { label: 'What your agent did', value: `Called ${DEMO_CALL.callee}; booked ${DEMO_JOB.ref} for 07:30 tomorrow` },
+      { label: 'On confirm', value: 'the task moves to Done and the decision is recorded' },
+    ],
+    note: 'Deny and T-2201 stays waiting — nothing on the board or in the library changes.',
+  }, { task: task.id });
+}
+
+function proposeBoardWrite(line: string) {
+  if (pendingGate('board')) { agentSays(300, 'The write card is still waiting above — hold it to confirm.'); return; }
+  if (gateApproved('board')) { agentSays(300, `That job is already on line ${line}.`); return; }
+  if (!boardHasLine(line)) { agentSays(300, `The board has no line ${line} — open the Board tab first, then say it again.`); return; }
+  auto(`read line ${line} and drafted the job card from the call`);
+  pushGate('board', `Ready to put ${DEMO_JOB.ref} on line ${line}. Nothing is written until you confirm — hold the card.`, {
+    title: `Write ${DEMO_JOB.ref} to line ${line}`,
+    fields: [
+      { label: 'Board line', value: `line ${line} · ${DEMO_JOB.customer}` },
+      { label: 'Operation', value: 'create · one new job card' },
+      { label: 'Job', value: `${DEMO_JOB.ref} · ${DEMO_JOB.title}` },
+      { label: 'Changes', value: 'open · 2 pallets banded · 07:30 tomorrow' },
+    ],
+    note: 'Writes to the demo board storage only — the live RHL board is never touched.',
+  }, { line });
+  notify('Write waiting on you', `line ${line} · ${DEMO_JOB.ref} — open Chat and hold the card`);
+}
+
+function proposeSkill() {
+  if (pendingGate('skill')) { agentSays(300, 'The library card is still waiting above — hold it to confirm.'); return; }
+  if (gateApproved('skill')) { agentSays(300, 'That skill is already in the company library.'); return; }
+  auto('checked the company library and drafted the skill manifest');
+  pushGate('skill', 'You run this dump every week. I can save it as a warehouse skill — nothing is published until you confirm.', {
+    title: `Publish “${DEMO_SKILL_MANIFEST.name}” to the company library`,
+    fields: [
+      { label: 'Skill', value: DEMO_SKILL_MANIFEST.name },
+      { label: 'Version', value: `v${DEMO_SKILL_MANIFEST.version}` },
+      { label: 'Offered to', value: DEMO_ROLE },
+      { label: 'Summary', value: DEMO_SKILL_MANIFEST.discovery.summary },
+    ],
+    note: 'Persistent and shared with every warehouse operator — deny and nothing is published.',
+  });
+}
+
+// ---- the acts behind the gates ----
+
+function runDemoCall() {
   if (demoStarted.call) return;
   demoStarted.call = true;
+  auto('transcribed the call and took the notes');
   agentSays(500, 'Calling now — this is the demo transcript, not a live call.');
   const callId = id('m');
   setTimeout(() => {
@@ -222,10 +401,13 @@ function startDemoCall() {
     kind: 'job', ref: DEMO_JOB.ref, title: DEMO_JOB.title, rows: DEMO_JOB.rows, note: 'From the call · demo data', line: DEMO_JOB.line,
   });
   setTimeout(() => notify('DMP-4471 booked', "Lord's Haulage · 07:30 tomorrow · 2 pallets banded"), endAt + 700);
-  agentSays(endAt + 1700, 'Open the Board tab and say “add this job to line F” — I will pull the full details across.');
+  agentSays(endAt + 1900, 'Open the Board tab and say “add this job to line F” — I will pull the full details across.');
+  // the review gate is the LAST turn: nothing arrives to scroll the card out from under a hold
+  setTimeout(() => proposeSignOff(), endAt + 2100);
 }
 
-/** The board's command bubble (docs/AGENT-HANDOFF.md) hands the text here in demo mode. */
+/** The board's command bubble (docs/AGENT-HANDOFF.md) hands the text here in demo mode. The command
+ *  prepares the write; it never writes — the write waits at a review gate. */
 export function handleBoardCommand(text: string) {
   const clean = String(text || '').trim();
   const m = /line\s*([A-S])\b/i.exec(clean);
@@ -233,25 +415,37 @@ export function handleBoardCommand(text: string) {
   const line = m[1].toUpperCase();
   if (!/add|put|job|this/i.test(clean)) { agentSays(400, 'I have the job card ready — say “add this job to line ' + line + '” when you want it on the board.'); return; }
   if (demoStarted.board) { agentSays(400, `That job is already on line ${line}.`); return; }
+  proposeBoardWrite(line);
+}
+
+function runBoardWrite(line: string) {
+  if (demoStarted.board) return;
   const ok = writeJobToBoard(line);
-  demoStarted.board = true;
   if (!ok) { agentSays(300, 'The board has no line ' + line + ' — nothing was written.'); return; }
+  demoStarted.board = true;
   notify(`${DEMO_JOB.ref} added to line ${line}`, 'Pulled from the call · full details on the job card');
   agentSays(900, `Pulled the full job details from the call and added ${DEMO_JOB.ref} to line ${line} on the board.`, {
     kind: 'job', ref: DEMO_JOB.ref, title: DEMO_JOB.title, rows: DEMO_JOB.rows, note: `Written to line ${line} · demo instance`, line,
   });
-  agentSays(2100, 'You run this dump every week. Want me to save it as a warehouse skill in the company library?', {
-    kind: 'offer', text: 'Add “dump-run-intake” to the company library for the warehouse operator role?', action: 'Build the skill', done: false,
-  });
+  setTimeout(() => proposeSkill(), 1600);
+}
+
+function readDemoBoard(): { lines: { id: string; code: string }[]; entries: Record<string, unknown>[] } | null {
+  try {
+    const raw = localStorage.getItem('rhl.demo.v1');
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+function boardHasLine(line: string): boolean {
+  return !!(readDemoBoard()?.lines || []).find((l) => l.code === line);
 }
 
 /** Write the demo job onto the running board's demo data (same-origin localStorage + the board's
  *  own BroadcastChannel signal). The board is the real board build with VITE_BACKEND=demo. */
 function writeJobToBoard(line: string): boolean {
   try {
-    const raw = localStorage.getItem('rhl.demo.v1');
-    if (!raw) return false;
-    const data = JSON.parse(raw) as { lines: { id: string; code: string }[]; entries: Record<string, unknown>[] };
+    const data = readDemoBoard();
+    if (!data) return false;
     const lineObj = (data.lines || []).find((l) => l.code === line);
     if (!lineObj) return false;
     if ((data.entries || []).some((e) => String(e.title || '').includes(DEMO_JOB.ref))) return true;
@@ -302,7 +496,7 @@ function publishLocally(tool: LibTool) {
   if (!localSkills.some((t) => t.name === tool.name)) localSkills.push(tool);
 }
 
-export async function buildDemoSkill() {
+async function runSkillPublish() {
   if (demoStarted.skill || demoStarted.skillBusy) return;
   demoStarted.skillBusy = true;
   agentSays(300, 'Checking the company library first…');
@@ -344,12 +538,16 @@ export async function buildDemoSkill() {
 }
 
 function demoSend(text: string) {
-  if (/call|truck|dump|lorry|slot/i.test(text) && /call|ask|book|ring|phone|get/i.test(text)) { startDemoCall(); return; }
-  if (/skill|library|save/i.test(text)) { void buildDemoSkill(); return; }
+  if (/sign\s*off|sign it off|sign the task/i.test(text)) { proposeSignOff(); return; }
+  if (/call|truck|dump|lorry|slot/i.test(text) && /call|ask|book|ring|phone|get/i.test(text)) { proposeCall(); return; }
+  if (/skill|library|save/i.test(text)) { proposeSkill(); return; }
   agentSays(600, 'I can call the truck company about the dump, or once the job is on the board I can turn it into a warehouse skill. Everything here runs on demo data.');
 }
 
 export function demoPendingReplies(): boolean { return demoPending > 0; }
+
+// The demo agent speaks first: the call is prepared, and it waits at a review gate (no tap can run it).
+if (DEMO) setTimeout(() => { if (gateCards('call').length === 0) proposeCall(); }, 1400);
 
 // ---------------------------------------------------------------- tasks (persist + phone creation)
 
@@ -375,15 +573,31 @@ export function advanceTask(taskId: string) {
 
 const decisionId = (recorded: number) => `D-${recorded + 9}`;
 
-/** Sign a waiting task off IN PLACE (the round-7 blocking fix). One mutation moves the task to done,
- *  records the sign-off in the Decisions inbox and updates `lastOutcome`, so the morning brief, the
- *  Tasks badge, the Tasks board and the Decisions page all read the same single store at once and
- *  cannot disagree. Idempotent: only a task still in `waiting` can be signed off. */
+const decisionNote = (at: number) =>
+  `you · ${new Date(at).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`;
+
+/** Move a waiting task to done and nothing else: the caller records the decision. Idempotent — only a
+ *  task still in `waiting` can be completed. */
+function completeTask(taskId: string): boolean {
+  const task = state.tasks.find((t) => t.id === taskId);
+  if (!task || task.state !== 'waiting') return false;
+  const stamp = new Date(now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  commit({
+    ...state,
+    tasks: state.tasks.map((t) => (t.id === taskId
+      ? { ...t, state: 'done', last: `you · signed off ${stamp}` }
+      : t)),
+  });
+  return true;
+}
+
+/** Sign a waiting task off from the Tasks board's in-place HOLD gate (a tap cannot sign off). One
+ *  mutation moves the task to done and records the sign-off in the Decisions inbox. Idempotent. */
 export function signOffTask(taskId: string) {
   const task = state.tasks.find((t) => t.id === taskId);
   if (!task || task.state !== 'waiting') return;
+  if (!completeTask(taskId)) return;
   const at = now();
-  const stamp = new Date(at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const decision: Decision = {
     id: decisionId(state.decisions.length),
     approvalId: task.id,
@@ -391,19 +605,30 @@ export function signOffTask(taskId: string) {
     scope: `task sign-off · ${task.id}`,
     outcome: 'approved',
     at,
-    note: `you · ${new Date(at).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`,
+    note: decisionNote(at),
     kind: 'signoff',
   };
-  commit({
-    ...state,
-    tasks: state.tasks.map((t) => (t.id === taskId
-      ? { ...t, state: 'done', last: `you · signed off ${stamp}` }
-      : t)),
-    decisions: [decision, ...state.decisions],
-    // deliberately NOT lastOutcome: the sign-off outcome belongs in the Decisions inbox, and the
-    // in-thread outcome strip slot must stay with the pending approval it replaces (otherwise the
-    // sign-off would hide an approval that still needs the owner).
-  });
+  commit({ ...state, decisions: [decision, ...state.decisions] });
+}
+
+/** Deny the in-place sign-off: record the denial and leave the task waiting. */
+export function denySignOff(taskId: string) {
+  const task = state.tasks.find((t) => t.id === taskId);
+  if (!task || task.state !== 'waiting') return;
+  const at = now();
+  const decision: Decision = {
+    id: decisionId(state.decisions.length),
+    approvalId: task.id,
+    title: `${task.title} — sign-off denied`,
+    scope: `task sign-off · ${task.id}`,
+    outcome: 'denied',
+    at,
+    note: decisionNote(at),
+    kind: 'signoff',
+  };
+  // deliberately NOT lastOutcome: the sign-off outcome belongs in the Decisions inbox, and the
+  // in-thread outcome strip slot must stay with the pending approval it replaces.
+  commit({ ...state, decisions: [decision, ...state.decisions] });
 }
 
 // ---------------------------------------------------------------- approvals (record, pin, outcome)

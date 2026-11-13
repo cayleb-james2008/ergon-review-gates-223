@@ -12,11 +12,15 @@ const HOLD_MS = 900;
 type Props = {
   label?: string;
   heldLabel?: string;
+  /** what the committed state says, e.g. "Called", "Written", "Published", "Signed off" */
+  committedLabel?: string;
   onCommit: () => void;
   disabled?: boolean;
 };
 
-export function HoldToSend({ label = 'Hold to approve', heldLabel = 'Keep holding…', onCommit, disabled = false }: Props) {
+export function HoldToSend({
+  label = 'Hold to approve', heldLabel = 'Keep holding…', committedLabel = 'Approved', onCommit, disabled = false,
+}: Props) {
   const [progress, setProgress] = useState(0); // 0..1
   const [committed, setCommitted] = useState(false);
   const raf = useRef<number | null>(null);
@@ -68,7 +72,7 @@ export function HoldToSend({ label = 'Hold to approve', heldLabel = 'Keep holdin
         size="lg"
         tone="light"
         depth="medium"
-        aria-label={`${label} — hold about 0.9 seconds to commit; a tap cannot send`}
+        aria-label={`${label} — hold ~0.9 seconds to confirm; a tap cannot confirm`}
         onPointerDown={(e: React.PointerEvent) => { e.preventDefault(); start(); }}
         onPointerUp={() => stop(true)}
         onPointerLeave={() => stop(true)}
@@ -87,13 +91,13 @@ export function HoldToSend({ label = 'Hold to approve', heldLabel = 'Keep holdin
       >
         <span className="hold-label">
           {committed ? <CheckIcon size={16} strokeWidth={2.2} aria-hidden="true" /> : null}
-          {committed ? 'Approved' : holding ? heldLabel : label}
+          {committed ? committedLabel : holding ? heldLabel : label}
         </span>
       </TactileButton>
       <span className="hold-track" aria-hidden="true">
         <span className="hold-fill" style={{ transform: `scaleX(${progress})` }} />
       </span>
-      <span className="hold-hint mono">hold ~0.9 s · a tap cannot send</span>
+      <span className="hold-hint mono">hold ~0.9 s · a tap cannot confirm</span>
     </div>
   );
 }

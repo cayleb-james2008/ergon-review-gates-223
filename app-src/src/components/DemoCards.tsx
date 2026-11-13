@@ -1,8 +1,9 @@
 // components/DemoCards.tsx — the demo-only cards in the thread: the SIMULATED call, the job card
-// the agent pulled from it, the published skill and the offer to build it. No production path uses
-// these components; the base suite thread renders plain turns only.
+// the agent pulled from it, the published skill, and the review gates (GateCard) that hold every
+// consequential act. No production path uses these components; the base suite thread renders plain
+// turns only.
 import type { Msg, MsgCard } from '../data/fixtures';
-import { buildDemoSkill } from '../data/store';
+import { GateCard } from './GateCard';
 
 function SimulationBadge() {
   return <span className="demo-badge">SIMULATED — no real call</span>;
@@ -64,31 +65,13 @@ export function SkillCard({ card }: { card: Extract<MsgCard, { kind: 'skill' }> 
   );
 }
 
-export function OfferCard({ card, messageId }: { card: Extract<MsgCard, { kind: 'offer' }>; messageId: string }) {
-  return (
-    <div className="demo-card offer-card" data-testid="offer-card">
-      <p className="demo-card-text">{card.text}</p>
-      <button
-        type="button"
-        className="demo-action"
-        disabled={card.done}
-        onClick={() => { void buildDemoSkill(); }}
-        data-testid="build-skill"
-        data-message={messageId}
-      >
-        {card.done ? 'Building…' : card.action}
-      </button>
-    </div>
-  );
-}
-
 export function MessageCard({ m }: { m: Msg }) {
   if (!m.card) return null;
   switch (m.card.kind) {
     case 'call': return <CallCard card={m.card} />;
     case 'job': return <JobCard card={m.card} />;
     case 'skill': return <SkillCard card={m.card} />;
-    case 'offer': return <OfferCard card={m.card} messageId={m.id} />;
+    case 'gate': return <GateCard card={m.card} messageId={m.id} />;
     default: return null;
   }
 }
