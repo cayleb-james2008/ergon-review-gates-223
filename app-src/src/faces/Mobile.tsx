@@ -139,14 +139,14 @@ export function Mobile({ initialView }: { initialView: ViewId | 'make' }) {
       </div>
 
       <div className="m-bottom">
-        {demo ? null : tab === 'chat' ? (
+        {tab === 'chat' ? (
           lastOutcome ? (
             <OutcomeStrip
               outcome={lastOutcome.decision}
               onDismiss={dismissOutcome}
-              onOpenDecisions={openDecisions}
+              onOpenDecisions={demo ? undefined : openDecisions}
             />
-          ) : (
+          ) : demo ? null : (
             <ApprovalCard approvals={approvals} compact />
           )
         ) : null}

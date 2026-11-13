@@ -7,6 +7,7 @@ import { BRIEF, briefLines, MAKES, type Msg } from '../data/fixtures';
 import { DEMO } from '../data/store';
 import { DEMO_BRIEF_LINES, DEMO_BRIEF_TITLE } from '../data/demo';
 import { MessageCard } from '../components/DemoCards';
+import { AutoLog } from '../components/AutoLog';
 import { useErgon } from '../data/store';
 import { PresenceMark } from '../components/PresenceMark';
 import { DeliveryRoute } from '../components/Diagrams';
@@ -82,6 +83,8 @@ export function Thread({ messages, replying, tasks = [], compact = false }: {
           ))}
         </ul>
       </motion.section>
+
+      {DEMO ? <AutoLog /> : null}
 
       {tasks.length > 0 ? <DeliveryRoute tasks={tasks} compact={compact} /> : null}
 

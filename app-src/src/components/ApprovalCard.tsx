@@ -63,7 +63,9 @@ export function ApprovalCard({ approvals, compact = false }: { approvals: Approv
 export function OutcomeStrip({ outcome, onDismiss, onOpenDecisions }: {
   outcome: Decision;
   onDismiss: () => void;
-  onOpenDecisions: () => void;
+  /** omitted where the face has no Decisions surface (the demo phone's tab grammar): the strip then
+   *  shows the recorded decision and Dismiss only, never a button that goes nowhere */
+  onOpenDecisions?: () => void;
 }) {
   const approved = outcome.outcome === 'approved';
   const signedOff = outcome.kind === 'signoff';
@@ -90,12 +92,14 @@ export function OutcomeStrip({ outcome, onDismiss, onOpenDecisions }: {
         <strong>Decision recorded — {signedOff ? 'Signed off' : approved ? 'Approved' : 'Denied'}</strong>
         <span>{outcome.title} · <span className="mono">{outcome.id}</span> · <span className="mono">{outcome.note.replace(/^you · /, '')}</span></span>
       </span>
-      <button
-        type="button" className="btn-quiet" onClick={guard(onOpenDecisions)}
-        style={inert} data-testid="outcome-open-inbox"
-      >
-        Decisions inbox
-      </button>
+      {onOpenDecisions ? (
+        <button
+          type="button" className="btn-quiet" onClick={guard(onOpenDecisions)}
+          style={inert} data-testid="outcome-open-inbox"
+        >
+          Decisions inbox
+        </button>
+      ) : null}
       <button
         type="button" className="btn-quiet" onClick={guard(onDismiss)}
         style={inert} data-testid="outcome-dismiss"

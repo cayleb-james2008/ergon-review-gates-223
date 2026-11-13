@@ -8,19 +8,30 @@
 
 export type TaskState = 'working' | 'waiting' | 'done';
 export type CallTurnView = { who: 'agent' | 'truck'; label: string; text: string };
+/** The GATED class: each kind is one consequential act the agent prepares and the employee confirms. */
+export type GateKind = 'call' | 'board' | 'skill' | 'signoff';
+export type GateState = 'pending' | 'approved' | 'denied';
+export type GateCardView = {
+  kind: 'gate'; gate: GateKind; state: GateState;
+  title: string; fields: { label: string; value: string }[]; note: string;
+  payload?: Record<string, string>;
+  /** the Decisions-inbox record written when the gate was acted on */
+  decisionId?: string;
+};
 export type MsgCard =
   | { kind: 'call'; status: 'dialing' | 'live' | 'done'; callee: string; number: string; turns: CallTurnView[]; simulated: true; ended?: string }
   | { kind: 'job'; ref: string; title: string; rows: { label: string; value: string }[]; note: string; line: string }
   | { kind: 'skill'; name: string; version: string; role: string; summary: string; published: boolean }
-  | { kind: 'offer'; text: string; action: string; done: boolean };
+  | GateCardView;
 export type Msg = { id: string; from: 'agent' | 'you'; text: string; tag?: 'needs-you'; at: number; fixture?: boolean; card?: MsgCard };
 export type Task = { id: string; title: string; state: TaskState; last: string; at: number };
 export type DecisionOutcome = 'approved' | 'denied';
 export type Decision = {
   id: string; approvalId: string; title: string; scope: string;
   outcome: DecisionOutcome; at: number; note: string;
-  /** approval = a grant acted on in the thread; signoff = a waiting task signed off in place */
-  kind?: 'approval' | 'signoff';
+  /** approval = a grant acted on in the thread; signoff = a waiting task signed off in place;
+   *  gate = a review gate confirmed or denied in the thread */
+  kind?: 'approval' | 'signoff' | 'gate';
 };
 export type Approval = { id: string; tag: string; title: string; body: string; scope: string; expires: string; klass: string };
 export type Settings = {
