@@ -1,0 +1,3 @@
+{ "name": "tooltip", "title": "Tooltip", "file": "src/components/ui/tooltip.jsx", "base": "shadcn/ui Tooltip on Radix Tooltip",
+  "uses": ["floating", "line-strong", "ink"], "states": ["open"], "check": {},
+  "notes": "Only for the drag handle and for the disabled Edit button, where it states the reason." }

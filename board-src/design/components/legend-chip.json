@@ -1,0 +1,36 @@
+{
+  "name": "legend-chip",
+  "title": "Initials chip and legend",
+  "file": "src/components/Header.jsx",
+  "also": [
+    "src/core/legend.js",
+    "src/config/legend.json"
+  ],
+  "base": "custom",
+  "uses": [
+    "ink",
+    "hue-blue",
+    "hue-pink",
+    "hue-orange",
+    "hue-green",
+    "hue-purple",
+    "muted"
+  ],
+  "states": [
+    "neutral",
+    "blue",
+    "pink",
+    "orange",
+    "green",
+    "purple"
+  ],
+  "against": {},
+  "check": {
+    "blue": "background-color",
+    "pink": "background-color",
+    "orange": "background-color",
+    "green": "background-color",
+    "purple": "background-color"
+  },
+  "notes": "Initials carry the floor's own sticker colours from src/config/legend.json (JA blue, JS pink, JG orange, AK green, LB purple; JAN is an alias of JA). Initials that are not mapped stay neutral and are never given a guessed identity. The same chip is the legend in the header (with a visible caption, Initials) and the initials on each job card. Ink on every tint is 7:1 or better in both themes; the tints are low chroma on purpose."
+}

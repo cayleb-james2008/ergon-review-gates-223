@@ -1,0 +1,39 @@
+{
+  "schema": "ergon-component/0.1",
+  "kind": "app",
+  "name": "rhl-warehouse-board",
+  "version": "0.1.0",
+  "description": "Warehouse lines board (A-S): a shared board of jobs per line, for people and their agents.",
+  "standalone": true,
+  "interface": {
+    "human": {
+      "type": "web",
+      "entry": "dist/index.html",
+      "build": "npm run build"
+    },
+    "agent": {
+      "tools": "public/agent-tools.json",
+      "manifest": "public/agent.json",
+      "client": "agent/client.mjs"
+    }
+  },
+  "requires": {
+    "backend": {
+      "type": "supabase",
+      "schema": "ergon_warehouse",
+      "migrations": "supabase/migrations"
+    },
+    "env": [
+      "VITE_SUPABASE_URL",
+      "VITE_SUPABASE_ANON_KEY",
+      "VITE_BACKEND"
+    ],
+    "secrets_entered_by_owner": [],
+    "access": "per-employee agent-issued temporary keys (no passcodes, no shared secrets); keys minted by the user's agent (stand-in issuer: ops/keys.mjs)"
+  },
+  "hosting": {
+    "type": "static",
+    "notes": "vercel.json; keep-alive at api/keepalive.js"
+  },
+  "swap": "Replace this folder (or its repository) with another component of the same kind and name; no platform code imports it."
+}

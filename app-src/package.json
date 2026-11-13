@@ -1,0 +1,32 @@
+{
+  "name": "openbell-front-set",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview --port 4176 --strictPort",
+    "rules": "node scripts/product-rules.mjs S && node scripts/product-rules.mjs A && node scripts/motion-source.ergon.mjs"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "@radix-ui/colors": "^3.0.0",
+    "clsx": "2.1.1",
+    "cnfast": "0.2.0",
+    "lucide-react": "^1.70.0",
+    "motion": "12.42.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tailwind-merge": "2.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "playwright-core": "^1.65.0",
+    "tailwindcss": "4.3.5",
+    "typescript": "^5.9.3",
+    "vite": "8.3.5"
+  }
+}

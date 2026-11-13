@@ -1,0 +1,31 @@
+{
+  "name": "select",
+  "title": "Select",
+  "file": "src/components/ui/select.jsx",
+  "base": "shadcn/ui Select on Radix Select",
+  "uses": [
+    "field",
+    "field-line",
+    "floating",
+    "line-strong",
+    "hover",
+    "ink",
+    "ring"
+  ],
+  "states": [
+    "default",
+    "hover",
+    "press",
+    "bay",
+    "focus",
+    "disabled",
+    "open"
+  ],
+  "check": {
+    "hover": "border-top-color",
+    "focus": "outline-style",
+    "disabled": "opacity",
+    "press": "scale"
+  },
+  "notes": "Never a native select. The open list is a floating layer: tone step plus 1px border, opacity and 8px rise on enter. The dialog Line field shows the painted bay marker beside the line name."
+}

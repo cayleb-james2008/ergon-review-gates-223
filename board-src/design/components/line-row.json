@@ -1,0 +1,22 @@
+{
+  "name": "line-row",
+  "title": "Line row (frame)",
+  "file": "src/components/Board.jsx",
+  "base": "custom: the row is the group",
+  "uses": [
+    "frame",
+    "panel",
+    "marker-bg",
+    "marker-fg",
+    "raised"
+  ],
+  "states": [
+    "occupied",
+    "empty",
+    "dim"
+  ],
+  "check": {
+    "empty": "background-color"
+  },
+  "notes": "Each line is one framed row: a 1px frame (3:1 against the page), the row's own radius (12), the bay marker inside the frame and the cards on the row's fill. Empty lines keep their frame so the full A to S structure always shows. Search dims a line by tone, the frame stays."
+}

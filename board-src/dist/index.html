@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#181c22">
+  <title>RHL Warehouse Board</title>
+  <link rel="alternate" type="application/json" href="./agent.json" title="Agent interface">
+  <link rel="icon" href="./rhl-logo.svg" type="image/svg+xml">
+  <!-- Dark is the default and the primary mode, whatever the system says. ?theme=light overrides it, for review. Set before first paint. -->
+  <script>(function(){var q=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=q==='light'?'light':'dark'})()</script>
+  <!-- Launch key, first thing the page does: #key=... goes into this tab's sessionStorage and out of the address bar before any module runs (the rest of the fragment is kept). -->
+  <script>(function(){var h=location.hash.replace(/^#/,''),p=new URLSearchParams(h),k=p.get('key');if(!k)return;try{sessionStorage.setItem('rhl.key',k)}catch(e){}p.delete('key');var r=p.toString();try{history.replaceState(null,'',location.pathname+location.search+(r?'#'+r:''))}catch(e){}})()</script>
+  <script type="module" crossorigin src="./assets/main-BH4w1_Y5.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/button-PUoX5M7c.js">
+  <link rel="stylesheet" crossorigin href="./assets/main-s2yyMUud.css">
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>

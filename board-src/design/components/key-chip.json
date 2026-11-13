@@ -1,0 +1,20 @@
+{
+  "name": "key-chip",
+  "title": "Key status chip",
+  "file": "src/components/KeyChip.jsx",
+  "base": "custom, a status not a control",
+  "uses": [
+    "muted",
+    "ink"
+  ],
+  "states": [
+    "none",
+    "valid",
+    "expired",
+    "invalid"
+  ],
+  "check": {
+    "valid": "color"
+  },
+  "notes": "Quiet chip in the bubble: valid 'Editing as <subject>' (tooltip: expires at), none 'View only', expired 'Editing ended', invalid 'Editing unavailable'. data-state and data-subject are the hooks. Nothing here asks a person for a secret."
+}

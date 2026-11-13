@@ -1,0 +1,19 @@
+{
+  "name": "popover",
+  "title": "Popover",
+  "file": "src/components/ui/popover.jsx",
+  "base": "Radix Popover (the compact Add job form on each line row)",
+  "uses": [
+    "floating",
+    "line-strong",
+    "ink",
+    "muted",
+    "danger"
+  ],
+  "states": [
+    "open",
+    "error"
+  ],
+  "check": {},
+  "notes": "Anchored to the row's Add job. The line is already chosen. Without a valid key a plain notice sits in the panel in place of saving."
+}

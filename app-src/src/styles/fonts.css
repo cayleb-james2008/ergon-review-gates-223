@@ -1,0 +1,8 @@
+/* fonts.css — Geist Sans + Geist Mono, the confirmed reference's type, vendored into the dist (OFL 1.1).
+   Source: /home/cayleb/.local/share/fonts/openbell-house/ (Geist-Regular/Medium/SemiBold,
+   GeistMono-Regular/Bold); licence files copied beside the fonts in public/fonts/. No remote font fetch. */
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/Geist-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 500; font-display: swap; src: url("/fonts/Geist-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/Geist-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Geist Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/GeistMono-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Geist Mono"; font-style: normal; font-weight: 700; font-display: swap; src: url("/fonts/GeistMono-Bold.ttf") format("truetype"); }

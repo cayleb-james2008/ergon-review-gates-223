@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "name": "rhl-lines-board",
+  "title": "RHL Lines Board",
+  "description": "A warehouse lines board: lines A to S, each holding jobs with a title, note, initials and a status (open, hold, ready, done). Human-native (web UI) and agent-native (this interface): every capability of the UI is available to an employee's AI agent through one documented, gated surface, with the same access rule and the same data.",
+  "nativeFor": [
+    "humans",
+    "agents"
+  ],
+  "standalone": true,
+  "tools": {
+    "file": "./agent-tools.json",
+    "format": "JSON: top-level limits, access, keys, errorCodes and tools[]; each tool has name, description, inputSchema (JSON Schema), outputSchema, errors, annotations. Convertible directly to MCP / Claude / other tool registrations."
+  },
+  "client": {
+    "file": "agent/client.mjs",
+    "language": "Node 22+ ESM, zero dependencies, Node built-ins only",
+    "usage": "createBoardClient({ url, anonKey, key, actor }) returns { tools, callTool(name, args) }. CLI: node agent/client.mjs <tool> '<json args>' prints one JSON result. callTool never throws for expected failures; it returns { ok: false, error, message }."
+  },
+  "connection": {
+    "howToGetSettings": "From environment variables. Never from this file. BOARD_URL and BOARD_ANON_KEY come from the board owner; BOARD_KEY comes from your own agent's key tool.",
+    "env": {
+      "BOARD_URL": "Base URL of the board's data API (the project URL). Must be https, except localhost.",
+      "BOARD_ANON_KEY": "The public anon (publishable) key. Never a service-role key.",
+      "BOARD_KEY": "A board key (ergk_...) issued for you by your own agent. Needed for writes and key_check only; reads work without it.",
+      "BOARD_ACTOR": "Optional short actor tag stamped into initials on agent writes (default AGT, max 6 characters)."
+    },
+    "secretsInThisFile": false
+  },
+  "access": {
+    "model": "No app has a passcode or shared secret. Reads are open. Every write needs a temporary, app-scoped key issued for a specific employee by that person's own agent (ergk_ plus 43 base64url characters, 256-bit, stored hashed, at most 30 days). The agent generates, manages and deletes keys; a human never types or stores a secret.",
+    "read": "Open. PostgREST GET on /rest/v1/lines and /rest/v1/entries with headers apikey and Authorization: Bearer <anon key> and Accept-Profile: warehouse_board.",
+    "write": "Key-gated RPCs. POST /rest/v1/rpc/save_entry, /rest/v1/rpc/remove_entry, /rest/v1/rpc/check_key with Content-Profile: warehouse_board and a JSON body containing p_key. Direct table INSERT/UPDATE/DELETE is not permitted.",
+    "errors": "key_invalid (unknown, revoked or wrong app) and key_expired mean: stop, do not retry, ask your own agent for a new key. There is no throttle because keys are 256-bit.",
+    "keyToBrowser": "A key reaches a browser only in the URL fragment (#key=ergk_...), never the query string. The app keeps it in sessionStorage for that tab, strips the fragment from the address bar and sends it with writes. With no key the app never asks for a secret; it says editing needs a key from the person's agent."
+  },
+  "idempotency": "job_save takes an optional client-generated uuid `id`. The same id twice updates the same job and never creates a duplicate, so retries after a network error are safe. The client reuses one id across its own retries.",
+  "attribution": {
+    "convention": "Who changed a job is authoritative in the read-only `updated_by` field on each job, set by the database from the subject of the validated key (the employee the key was issued for). It cannot be supplied by a caller: no tool accepts it and a payload value is rejected or ignored. `initials` is a display tag only: agent writes set it to a short actor tag (default AGT) unless initials is passed explicitly. Trust updated_by, not initials."
+  },
+  "testData": {
+    "marker": "Rows carry is_test. Synthetic rows have is_test = true; the human UI shows a TEST DATA badge and board_get returns test_data: true when any row is a TEST row.",
+    "rule": "Do not write to a board that shows test_data: true unless your user asked you to test."
+  },
+  "liveParity": "An agent's write is visible on the human UI within 5 seconds (realtime, with a polling fallback). A human's edit is readable by the agent on its next board_get.",
+  "humanUi": {
+    "entry": "./",
+    "keyFlow": "Open /#key=<ergk_...>. Machine hooks: #key-status[data-state=none|valid|expired|invalid][data-subject]; #board[data-can-edit][data-key-state]."
+  },
+  "docs": "docs/AGENT-INTERFACE.md",
+  "concurrency": "Edits can carry expected_revision (the job's revision as last read). A stale value returns conflict with current_revision and writes nothing; an edit of a deleted job returns not_found and does not recreate it. Creates never take it and stay idempotent by client id. job_set_status reads the revision first and writes with it. Never retry on conflict or not_found: re-read, then decide."
+}

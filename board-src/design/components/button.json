@@ -1,0 +1,37 @@
+{
+  "name": "button",
+  "title": "Button",
+  "file": "src/components/ui/button.jsx",
+  "base": "shadcn/ui Button on Radix Slot-free markup",
+  "uses": [
+    "accent",
+    "accent-hover",
+    "on-accent",
+    "ink",
+    "hover",
+    "field-line",
+    "danger",
+    "ring",
+    "line-strong"
+  ],
+  "states": [
+    "default",
+    "hover",
+    "press",
+    "focus",
+    "disabled",
+    "loading",
+    "secondary",
+    "outline",
+    "ghost",
+    "destructive"
+  ],
+  "check": {
+    "hover": "background-color",
+    "press": "scale",
+    "focus": "outline-style",
+    "disabled": "opacity",
+    "loading": "opacity"
+  },
+  "notes": "Primary uses the one accent. Press is scale .97 over 120 ms. Loading keeps the label ('Saving\u2026') and cannot be pressed twice."
+}

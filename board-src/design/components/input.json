@@ -1,0 +1,5 @@
+{ "name": "input", "title": "Input", "file": "src/components/ui/input.jsx", "base": "shadcn/ui Input",
+  "uses": ["field", "field-line", "ink", "muted", "danger", "ring"],
+  "states": ["default", "hover", "focus", "filled", "disabled", "error"],
+  "check": { "hover": "border-top-color", "focus": "outline-style", "disabled": "opacity", "error": "border-top-color" },
+  "notes": "Flat fill, 1px boundary at 3:1 or better, no inset shadow. Focus is an outline, the border does not change." }

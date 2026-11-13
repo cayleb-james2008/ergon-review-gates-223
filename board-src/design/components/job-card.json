@@ -1,0 +1,36 @@
+{
+  "name": "job-card",
+  "title": "Job card",
+  "file": "src/components/Job.jsx",
+  "base": "custom",
+  "uses": [
+    "raised",
+    "hover",
+    "cue",
+    "ink",
+    "muted",
+    "floating",
+    "marker-bg",
+    "marker-fg"
+  ],
+  "states": [
+    "open",
+    "hold",
+    "ready",
+    "done",
+    "untitled",
+    "editable",
+    "hover",
+    "focus",
+    "hit",
+    "dim",
+    "cue"
+  ],
+  "check": {
+    "hover": "background-color",
+    "hit": "outline-style",
+    "dim": "background-color",
+    "cue": "background-color"
+  },
+  "notes": "Customer bold over muted note, initials bottom right, status top right as word and glyph. Done is struck through but legible. Cue: tint returns to rest in 350 ms. Dim is one flat step (no fill, muted text), never opacity. One focus ring per card, drawn on the card for its name button and status badge (round 6)."
+}

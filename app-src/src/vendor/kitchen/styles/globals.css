@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+body {
+  position: relative;
+}
+
+/* Keep the recording frame steady when its navigation chrome is hidden. */
+html[data-recording] [data-recording-hide] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html[data-recording] nextjs-portal {
+  display: none;
+}
+
+@keyframes logo-trace-loader-loop {
+  to {
+    stroke-dashoffset: -1;
+  }
+}
+
+.root {
+  isolation: isolate;
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+}
+
+/* A lab in full screen covers the page: the page stays still behind it, and the dock steps aside. */
+html:has([data-lab-fullscreen]) {
+  overflow: hidden;
+}
+
+html:has([data-lab-fullscreen]) [data-bottom-dock] {
+  display: none;
+}
+
+/* The lab's mosaic and panel grow from their cards into full screen, and shrink back. */
+::view-transition-group(lab-pane),
+::view-transition-group(lab-panel) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+::view-transition-image-pair(lab-pane) {
+  overflow: hidden;
+}
+
+/* Both views of the mosaic are scaled to the pane's height and centred, so the mosaic in each
+   stays the same size as one fades into the other, whatever shape the pane passes through. */
+::view-transition-old(lab-pane),
+::view-transition-new(lab-pane) {
+  block-size: 100%;
+  inline-size: auto;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+}
+
+.small-shadow {
+  box-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.02),
+    0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.medium-shadow {
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.06),
+    0 1.5px 6px 0 rgba(0, 0, 0, 0.04);
+}

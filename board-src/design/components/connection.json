@@ -1,0 +1,26 @@
+{
+  "name": "connection",
+  "title": "Connection indicator",
+  "file": "src/components/Header.jsx",
+  "base": "custom",
+  "uses": [
+    "accent-text",
+    "dot-warn",
+    "danger",
+    "muted",
+    "ink"
+  ],
+  "states": [
+    "live",
+    "polling",
+    "offline",
+    "error"
+  ],
+  "against": {},
+  "check": {
+    "polling": "background-color",
+    "offline": "background-color",
+    "error": "background-color"
+  },
+  "notes": "A dot and one word: Live (accent), Reconnecting (warn), Offline (muted), Error (danger). The word carries the meaning; the dot only repeats it. Offline and Error never use the accent, because green means Live and Ready."
+}

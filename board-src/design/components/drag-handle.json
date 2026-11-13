@@ -1,0 +1,5 @@
+{ "name": "drag-handle", "title": "Drag handle", "file": "src/components/DragHandle.jsx", "base": "lucide GripVertical plus a flat state dot, the command bubble's handle",
+  "uses": ["muted", "ink", "accent-text", "floating"],
+  "states": ["idle", "working", "needs-you"],
+  "check": { "working": "background-color", "needs-you": "border-top-color" },
+  "notes": "The bubble's drag handle (drag, or arrow keys; Shift moves 48 px). A flat dot beside the grip: idle is a muted ring, working fills once per save or later sync (never on first load), needs-you is an accent ring only while the passcode form is open. Offline and error stay muted. The neural-net mark is reserved for agent profile icons (design/reserved/agent-avatar), it is not part of the board." }

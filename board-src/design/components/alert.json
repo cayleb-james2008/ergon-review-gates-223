@@ -1,0 +1,5 @@
+{ "name": "alert", "title": "Alert banner", "file": "src/components/ui/alert.jsx", "base": "shadcn/ui Alert",
+  "uses": ["panel", "warn-bg", "error-bg", "line-strong", "dot-warn", "danger", "ink"],
+  "states": ["info", "warn", "error", "with-action"],
+  "check": { "warn": "background-color", "error": "background-color" },
+  "notes": "Flat bar: icon, one sentence, optional action. role=status." }

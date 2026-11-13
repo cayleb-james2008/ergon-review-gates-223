@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "name": "rhl-lines-board",
+  "version": "0.1.0",
+  "description": "Tools for the warehouse lines board (lines A to S, each holding jobs). Same data and same access rule as the human web UI: reads are open, writes need a temporary per-employee key issued by the person's own agent. Names are snake_case and convert directly to MCP tools (name, description, inputSchema), Claude tool definitions (input_schema) and other tool registries.",
+  "limits": {
+    "title": 120,
+    "details": 240,
+    "initials": 6,
+    "controlCharacters": "not allowed in title, details or initials",
+    "lineCodes": "A to S (19 lines)",
+    "statuses": [
+      "open",
+      "hold",
+      "ready",
+      "done"
+    ],
+    "boardRowCap": 1000
+  },
+  "access": {
+    "read": "open: needs only the project URL and the public anon key",
+    "write": "needs a board key (ergk_...) on every write call (job_save, job_set_status, job_remove) and on key_check. Keys are temporary (at most 30 days), scoped to this app and issued for a specific employee by that person's own agent. The key is read from configuration (BOARD_KEY), never passed as a tool argument and never echoed back.",
+    "credentials": "There is no passcode and no shared secret. Never ask a human to type or tell you a secret, never use a service-role key, and never put a key in a URL query string. To hand a key to a browser, open the app with the key in the URL fragment (#key=...), which no server or log sees."
+  },
+  "attribution": "WHO changed a job is authoritative in the read-only `updated_by` field, which the database sets server-side from the subject of the validated key (the employee the key was issued for). It cannot be supplied by a caller: no tool accepts `updated_by`, and a value sent in a payload is rejected or ignored. `initials` is only a display tag: agent writes stamp it with a short actor tag (default AGT, configurable via BOARD_ACTOR, max 6 chars) when `initials` is not passed, and it can say anything. Trust `updated_by`, not `initials`.",
+  "testData": "Rows with is_test = true are synthetic TEST rows. board_get returns test_data: true when any row is a TEST row. Do not write to a board whose test_data is true unless your user explicitly asked you to test.",
+  "errorCodes": {
+    "key_invalid": "The key is unknown, revoked or issued for a different app (one answer for all three). Do not retry; ask your own agent to issue a new key for this employee.",
+    "key_expired": "The key is known but past its expiry. Do not retry; ask your own agent to issue a new key for this employee.",
+    "invalid": "The arguments failed validation (checked locally before any network call, and again by the database). Fix the arguments; message names the offending fields.",
+    "not_found": "No job with that id (for an edit with expected_revision or for job_set_status/job_remove: it is gone, nothing was written and nothing was recreated).",
+    "network": "The board could not be reached after retries (or an unexpected server reply). Safe to try again later: writes carry a client-generated id so a repeat never duplicates a job.",
+    "config": "Connection settings are missing or unusable (BOARD_URL, BOARD_ANON_KEY, BOARD_KEY), the key is not an ergk_ key, or the anon key was rejected.",
+    "unknown_tool": "No tool with that name.",
+    "conflict": "The job's stored revision differs from expected_revision: someone changed it since you read it. Nothing was written; the result carries current_revision. Do not retry the same call: re-read the job (board_find / board_get), decide whether your change still applies, then call again with the new revision."
+  },
+  "tools": [
+    {
+      "name": "board_get",
+      "description": "Read the whole board: all lines A to S in order, each with its jobs (id, title, details, initials, status open/hold/ready/done, revision), plus whether any row is TEST data. Use this first to learn current state, to get job ids, and to check test_data before writing. Do not use it to look for one job by text (use board_find) and do not poll it faster than every few seconds. Each job carries read-only updated_by (who last changed it, from the key subject). No key needed.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "description": "On success { ok: true, ... }.",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "test_data": {
+            "type": "boolean",
+            "description": "true when any line or job on the board is a synthetic TEST row"
+          },
+          "line_count": {
+            "type": "integer"
+          },
+          "job_count": {
+            "type": "integer"
+          },
+          "truncated": {
+            "type": "boolean",
+            "description": "true if the job list hit the server row cap and is incomplete"
+          },
+          "lines": {
+            "type": "array",
+            "description": "Ordered A to S.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Line label A..S"
+                },
+                "line_id": {
+                  "type": "string",
+                  "description": "Line uuid"
+                },
+                "is_test": {
+                  "type": "boolean"
+                },
+                "jobs": {
+                  "type": "array",
+                  "description": "Oldest first.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Job uuid"
+                      },
+                      "title": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "details": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "initials": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "open",
+                          "hold",
+                          "ready",
+                          "done"
+                        ]
+                      },
+                      "revision": {
+                        "type": "integer",
+                        "description": "Starts at 1, +1 on every save"
+                      },
+                      "is_test": {
+                        "type": "boolean"
+                      },
+                      "updated_by": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "description": "Read-only. The subject of the key that made the last change, set by the database. Null for rows never written through a key."
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        "network",
+        "config"
+      ],
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "requiresKey": false
+      }
+    },
+    {
+      "name": "board_find",
+      "description": "Find jobs by text, line and/or status. Text is a case-insensitive substring match over title, details and initials. Use it to locate a job id before changing it. Do not use it to list the whole board (use board_get). All filters are optional and combined with AND. Each job carries read-only updated_by (who last changed it, from the key subject). No key needed.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "description": "Substring to look for in title, details or initials."
+          },
+          "line": {
+            "type": "string",
+            "pattern": "^[A-S]$",
+            "description": "Line code A to S."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "hold",
+              "ready",
+              "done"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Max matches returned (default 50)."
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "test_data": {
+            "type": "boolean"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Matches returned"
+          },
+          "total_matches": {
+            "type": "integer",
+            "description": "Matches before the limit was applied"
+          },
+          "matches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "A job as in board_get plus line_code and line_id.",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "line_code": {
+                  "type": "string"
+                },
+                "line_id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "details": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "initials": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "revision": {
+                  "type": "integer"
+                },
+                "is_test": {
+                  "type": "boolean"
+                },
+                "updated_by": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Read-only. The subject of the key that made the last change, set by the database. Null for rows never written through a key."
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        "invalid",
+        "network",
+        "config"
+      ],
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "requiresKey": false
+      }
+    },
+    {
+      "name": "job_save",
+      "description": "Create a job on a line, or update an existing one. Pass `id` (a uuid you generate) to make the call idempotent: repeating it never creates a second job. Omit `id` and the client generates one and returns it; keep it to edit later. When updating, send only the fields you want to change; omitted fields keep their value. A new job needs a title and a line (line_code or line_id). Writes need a board key (BOARD_KEY); if you get key_invalid or key_expired, stop and ask your own agent for a new key. Do not use it just to change status (use job_set_status) and do not write to a board whose test_data is true unless asked. The result's updated_by is set by the database from your key; you cannot set it. To edit safely, pass expected_revision (the `revision` you read): a stale value returns conflict and a deleted job returns not_found, and nothing is written. Creates never take it: a create is an idempotent upsert by id. Omit it only when you deliberately want last-write-wins.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "description": "Job uuid. Optional, client-generated. Same id twice = same job (update)."
+          },
+          "line_code": {
+            "type": "string",
+            "pattern": "^[A-S]$",
+            "description": "Line A to S. Required for a new job unless line_id is given; on update, moves the job."
+          },
+          "line_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "description": "Line uuid (alternative to line_code)."
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]*$",
+            "description": "Customer or job text. Required when creating."
+          },
+          "details": {
+            "type": "string",
+            "maxLength": 240,
+            "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]*$",
+            "description": "The note. Empty string clears it."
+          },
+          "initials": {
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]*$",
+            "description": "Who touched it. Defaults to the actor tag (AGT)."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "hold",
+              "ready",
+              "done"
+            ],
+            "description": "Default open on create."
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Optional optimistic-concurrency guard: the job's `revision` as you last read it. If the stored revision differs the write is refused with conflict (nothing changed, current_revision returned); if the job was deleted you get not_found and it is not recreated."
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "created": {
+            "type": "boolean",
+            "description": "true if the job did not exist before this call"
+          },
+          "job": {
+            "type": "object",
+            "description": "The saved row: id, line_id, line_code, title, details, initials, status, revision, is_test, updated_by (read-only, the key's subject), created_at, updated_at."
+          }
+        }
+      },
+      "errors": [
+        "invalid",
+        "conflict",
+        "not_found",
+        "key_invalid",
+        "key_expired",
+        "network",
+        "config"
+      ],
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "requiresKey": true
+      }
+    },
+    {
+      "name": "job_set_status",
+      "description": "Change only the status of an existing job (open, hold, ready, done). Use it for quick moves such as marking a job ready. Do not use it to change anything else (use job_save) or to delete (use job_remove); it cannot create a job. Needs a board key; on key_invalid or key_expired stop and ask your own agent for a new key. It reads the job's current revision and writes with it, so a change by someone else in between returns conflict instead of silently overwriting; pass expected_revision yourself to guard against changes since an earlier read.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "description": "Job uuid from board_get / board_find."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "hold",
+              "ready",
+              "done"
+            ]
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Optional optimistic-concurrency guard: the job's `revision` as you last read it. If the stored revision differs the write is refused with conflict (nothing changed, current_revision returned); if the job was deleted you get not_found and it is not recreated."
+          }
+        },
+        "required": [
+          "id",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "job": {
+            "type": "object",
+            "description": "The saved row: id, line_id, line_code, title, details, initials, status, revision, is_test, updated_by (read-only, the key's subject), created_at, updated_at."
+          }
+        }
+      },
+      "errors": [
+        "not_found",
+        "invalid",
+        "conflict",
+        "key_invalid",
+        "key_expired",
+        "network",
+        "config"
+      ],
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "requiresKey": true
+      }
+    },
+    {
+      "name": "job_remove",
+      "description": "Permanently delete a job. There is no undo. Use only when your user asked to delete that specific job. Do not use it to finish a job (use job_set_status with done) or to clean up jobs you did not create. Removing an already removed job returns not_found. Needs a board key; on key_invalid or key_expired stop and ask your own agent for a new key.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "description": "Job uuid."
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string",
+            "description": "The removed job id"
+          }
+        }
+      },
+      "errors": [
+        "not_found",
+        "invalid",
+        "key_invalid",
+        "key_expired",
+        "network",
+        "config"
+      ],
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "requiresKey": true
+      }
+    },
+    {
+      "name": "key_check",
+      "description": "Check that your board key works and see who it was issued for and when it expires. Use it once before a batch of writes, or when a write returned key_invalid or key_expired and you have been given a new key. Do not use it to test other people's keys, and do not loop on it: on key_invalid or key_expired stop and ask your own agent for a new key. Writes nothing.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "subject": {
+            "type": "string",
+            "description": "The employee the key was issued for"
+          },
+          "expires_at": {
+            "type": "string",
+            "description": "ISO timestamp when the key stops working"
+          }
+        }
+      },
+      "errors": [
+        "key_invalid",
+        "key_expired",
+        "network",
+        "config"
+      ],
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "requiresKey": true
+      }
+    }
+  ],
+  "keys": {
+    "rule": "Keys are 256-bit random (ergk_ plus 43 base64url characters) and stored hashed, so there is no throttle and no lockout. A wrong key is simply key_invalid.",
+    "agentRule": "Never retry on key_invalid or key_expired. Stop and ask your own agent (or the person's key tool) to issue a new key for this employee. Never invent, guess or reuse another person's key."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "test-marker",
+  "title": "Test data marker",
+  "file": "src/components/Header.jsx",
+  "base": "custom",
+  "uses": [
+    "dot-warn",
+    "ink"
+  ],
+  "states": [
+    "default"
+  ],
+  "check": {},
+  "notes": "An amber dot and the words Test data, shown whenever the board holds TEST data or runs on the demo backend. No stripe, no chip, no fill: it must be unmistakable by its words and quiet by its form."
+}

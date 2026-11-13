@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "note": "Vendored parts are byte-identical to their pinned upstream sources except the entries below. Every patched file is named here with the upstream hash, the patched hash and the exact diff; rehearse.mjs validates the patched file against this record instead of claiming it is verbatim.",
+  "patches": [
+    {
+      "file": "build/src/vendor/mp/morphing-dialog.tsx",
+      "upstream": "sources/motion-primitives/components/core/morphing-dialog.tsx",
+      "upstreamSha256": "3783289015c56be36cd74701468a4d2aa345b48676b7fa12964ace9558e4e33e",
+      "patchedSha256": "9e48fcbd7d007da2394f4f8e3e30a6cae251e8eabfabc6fe5b020aa84ad89d0c",
+      "patchFile": "build/src/vendor/patches/morphing-dialog.a11y.patch",
+      "why": "Accessibility only: caller-supplied trigger label (the generated 'Open dialog <id>' name is a leak the round-6 UX review found), the context trigger ref attached so closing returns focus to the trigger, and dialog/title/subtitle ids that match the trigger's aria-controls / aria-labelledby. No behaviour or visual change to the part."
+    }
+  ]
+}

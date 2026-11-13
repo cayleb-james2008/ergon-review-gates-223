@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+supabase/.branches/
+supabase/.temp/
+*.log
+# generated seed output must never be committed
+seed-out/

@@ -1,0 +1,98 @@
+/* tokens.css — the ERGON DARK token layer (Ticket 068 / mission m-0185; the DARK scheme under Nox's
+   8 Nov standard change, "a dark rendering of the SAME confirmed design").
+   Flip point: this file is the single source of truth (m-0185/work/STANDARD-CHANGE.md).
+   Derivation (not copied from the rejected m-0138 build): the CONFIRMED roles are mirrored about
+   mid-lightness (L' = 1 - L) on the same neutral ramp, then clamped into a readable dark window so the
+   ground takes the value the confirmed ink held and the ink takes the value the confirmed sidebar held.
+   Cards sit one ramp step above the ground; hairlines are lighter than the ground; the primary role is
+   inverted (near-white face, dark text); ok/warn/danger keep their confirmed hues, re-picked for contrast
+   on dark and used ONLY as state. Full before/after map + measured contrast: worker-1/SCHEME-FLIP.md and
+   worker-1/TOKEN-MAP.md. No m-0138 value (#0B0F14 / #111821 / #7C93FF) appears anywhere below. */
+:root {
+  color-scheme: dark;
+
+  /* surfaces — raised cards on a near-black ground, separated by hairlines */
+  --eg-base: #0A0A0A;
+  --eg-panel: #161616;
+  --eg-raise: #1C1C1C;
+  --eg-sidebar: #0E0E0E;
+  --eg-muted-bg: #1E1E1E;
+  --eg-hover: #1E1E1E;
+
+  /* hairlines — lighter than the ground (the white scheme's line role, mirrored) */
+  --eg-line: #2E2E2E;
+  --eg-line-strong: #424242;
+  --eg-field-line: #5D5D5D;
+
+  /* ink — the confirmed sidebar value, now the ink */
+  --eg-ink: #FAFAFA;
+  --eg-muted: #A4A4A4;
+  --eg-subtle: #868686;
+
+  /* primary — inverted role: near-white face, dark text (a tap target is still the highest-contrast
+     object on the surface, exactly as the near-black primary was on white) */
+  --eg-accent: #FAFAFA;
+  --eg-accent-hover: #E5E5E5;
+  --eg-accent-press: #D4D4D4;
+  --eg-on-accent: #0A0A0A;
+  --eg-accent-wash: rgba(250, 250, 250, 0.08);
+
+  /* state colours ONLY — never decoration. Confirmed hues (152 / 80 / 25), lightness lifted for
+     contrast on the dark ground: ok 9.80:1, warn 10.50:1, danger 6.83:1 against --eg-base. */
+  --eg-ok: #5BCC80;
+  --eg-warn: #EDB345;
+  --eg-danger: #FF645F;
+  --eg-close-hover: #E24947;
+  --eg-close-press: #CC3336;
+  --eg-ok-wash: rgba(91, 204, 128, 0.14);
+  --eg-warn-wash: rgba(237, 179, 69, 0.14);
+  --eg-danger-wash: rgba(255, 100, 95, 0.14);
+
+  /* depth — token-derived: a white-scheme shadow is invisible on dark, so it gets its own role */
+  --eg-scrim: rgba(0, 0, 0, 0.66);
+  --eg-shadow: rgba(0, 0, 0, 0.55);
+
+  /* type */
+  --eg-text-body: 14px;
+  --eg-text-heading: 22px;
+  --eg-text-caption: 12.5px;
+  --eg-text-body-lg: 16px;
+  --eg-text-heading-lg: 24px;
+  --eg-text-caption-lg: 14px;
+  --font-sans: "Geist", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", "Cascadia Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* radii — the reference's 6/8/10/14 scale (unchanged by the scheme) */
+  --eg-radius-control: 6px;
+  --eg-radius-panel: 8px;
+  --eg-radius-lg: 10px;
+  --eg-radius-xl: 14px;
+
+  /* layout / targets (unchanged) */
+  --eg-space-1: 8px;
+  --eg-space-2: 12px;
+  --eg-space-3: 16px;
+  --eg-space-4: 24px;
+  --eg-space-5: 32px;
+  --eg-target-min: 44px;
+  --eg-target-employee: 56px;
+
+  /* motion — ONE source: src/motion.ts holds the same numbers (checked by scripts/motion-source.ergon.mjs, M1).
+     --dur-press 120 ms (tap), --dur-reveal 150 ms, --dur-swap 200 ms, --dur-enter 250 ms, --dur-sheet 350 ms,
+     --dur-live 1 s (typing dots), --dur-pulse 2.6 s (route node while a task works); --ease-house is Ergon's curve. */
+  --dur-press: 120ms;
+  --dur-reveal: 150ms;
+  --dur-swap: 200ms;
+  --dur-enter: 250ms;
+  --dur-sheet: 350ms;
+  --dur-live: 1000ms;
+  --dur-pulse: 2600ms;
+  --ease-house: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-loop: cubic-bezier(0.42, 0, 0.58, 1); /* the CSS keyword ease-in-out: the typing dots and the route pulse breathe as they did in the delivered build */
+  --eg-motion-tap: var(--dur-press);
+  --eg-motion-swap: var(--dur-swap);
+  --eg-motion-enter: var(--dur-enter);
+  --eg-motion-sheet: var(--dur-sheet);
+  --eg-ease: var(--ease-house);
+  --eg-hold-commit: 900ms;
+}

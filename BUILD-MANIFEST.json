@@ -1,0 +1,1166 @@
+{
+  "ticket": "195",
+  "builtAt": "2026-11-12T13:37:14.063Z",
+  "siteRoot": "site",
+  "page": "index.html",
+  "app": "app/",
+  "board": "board/",
+  "videoFile": "walkthrough-phone.mp4",
+  "files": {
+    "app/assets/index-DCmS6Iha.js": "ab4aecddc85394ed818cc98ca65b3d54e75a0571d81ce2db463e9c0189a59a97",
+    "app/assets/index-yfHjJhRj.css": "6633ad7b51709f957a733147b80ad56dd58dd7cbdc41156990bb397b71a60622",
+    "app/favicon.svg": "9a111f03a97d493992665b03e828aa74e087b3ae3525ea9de19c0347c143e0e5",
+    "app/fonts/Geist-Medium.ttf": "0090e004725f6f64b841715b4167920580f883fcf9b67fc6d744089103fec101",
+    "app/fonts/Geist-OFL.txt": "930853ee1daa68554d9e35c8a9175affb74f699fad9a5da6ee5ebe76379d9137",
+    "app/fonts/Geist-Regular.ttf": "5c8968eafb98a4c4f47033daf29e38e284a6f2a82eb017d171ab040fe7c4b615",
+    "app/fonts/Geist-SemiBold.ttf": "612ec98df33935354f39e81e54101656961ab6e5549f64b63eb57868ba7bab8d",
+    "app/fonts/GeistMono-Bold.ttf": "75c0828d5c1ee44b9ef9f4df577bf41595ec362e2ea3f1e558590c9e92c7949d",
+    "app/fonts/GeistMono-OFL.txt": "0acca17d633ecc7180aa12d8a60a95889d87a439cb83884597ff278046743dcb",
+    "app/fonts/GeistMono-Regular.ttf": "a55c1b51cda4afeab9e471e7947b85a20f7c8831d7e6b1470c1b7fbdc0f0f15e",
+    "app/index.html": "6c4f1e96363681fa2c413b45777eb3db02f627a6e2586f97f21dfc2929b5a324",
+    "board/agent-tools.json": "2a5a99039d01c8296299dc7eed003415511965bb0fc770de4fd1f390aaa134ae",
+    "board/agent.json": "ecc73efea6592c69663f8c8644c0a4f7056d34550dc1a794c0f769ccf969d1f9",
+    "board/assets/DemoKeys-D5RwAwxA.js": "44a01550c3470d1694e93764e008b19b2bd800404d7a703bf2314a56a1f6a1da",
+    "board/assets/button-PUoX5M7c.js": "de758afbd7e2e54efab0873f833048d89e7bc634290f44e28a444b32421d19fe",
+    "board/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2": "2317fa4bb293c9c0b110e18315d529235c47a0ddd3338cea3d8c7955e927899e",
+    "board/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2": "6894439694946a589d157ece003086960a6a4013d74a813dab7602efdb3d8c09",
+    "board/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2": "824f485b5d26e2f2da3c2b236132ece1bc8e4e43373452950bb0e40548b4313f",
+    "board/assets/geist-latin-wght-normal-BgDaEnEv.woff2": "19f9c92546aa300c312235e3125af1b81394d8db9a4bc4a425cd5b641d2d54e1",
+    "board/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2": "8fa40e5d248247735eb97a0bd593b8852440430600d6ba01364c31fe0abc1fe1",
+    "board/assets/main-BH4w1_Y5.js": "385f6bc4c826195e07cd575b0e100ec04fa28a4190116bb853c8895fa046019d",
+    "board/assets/main-s2yyMUud.css": "9328392efd812bd57c6e645c881da3c0c81409d89c0c2081653361d6fe0da840",
+    "board/index.html": "424f69eaf389fa89d30557e39663c9167e741f6267074a91e57966d6adb0429c",
+    "board/rhl-logo-light.svg": "c517a61a208a20ee1f2c0d6c2d5d6783ca3350ccc27558dca7c2879ed15a3849",
+    "board/rhl-logo.svg": "be5903929c0ee2c9e0523f34a3e00f8bb96217eb2c2d271265ade664e99444e0"
+  },
+  "nonDistFiles": [
+    ".nojekyll",
+    "index.html",
+    "walkthrough-phone.mp4"
+  ],
+  "build": {
+    "currentBuildIndexSha256": "43b1943d2e0807c863ae88d573961ea02abd70fb97aedebd79ea73d33ef7c4f6",
+    "baseBuildIndexSha256": "e15e7bfc153cea160861afc0e009bdd2f1589c59ea73ffa9e24cb0bfda589868",
+    "branch": "frontend/ergon-068-house-checks",
+    "branchHead": "1a32ed928be20400a57e288586a75c52ccb57917",
+    "codeHead": "513d1c66",
+    "frozenCopy": "worker-1/audit/current-build",
+    "frozenCopyIndexSha256": "43b1943d2e0807c863ae88d573961ea02abd70fb97aedebd79ea73d33ef7c4f6"
+  },
+  "deBrand": {
+    "ergonOccurrencesInServedFiles": 0,
+    "surfacesReplaced": [
+      "<title> · Ergon",
+      "brand-name span",
+      "Ergon fixture copy",
+      "ergon storage keys"
+    ]
+  },
+  "serve": {
+    "command": "cd /home/cayleb/.dsh-fleet-state/missions/m-0327/work/worker-2/pack && bash serve/demo-up.sh",
+    "baseUrl": "http://127.0.0.1:4966/",
+    "workdir": "pack/",
+    "brings": [
+      "demo library instance on 127.0.0.1:8751 (real library service code, demo data dir pack/.demo-library-data, three demo skills seeded through the real review gate)",
+      "demo host on 0.0.0.0:4966 (app at /app/, board at /board/, demo API, /footage/ when present)"
+    ],
+    "appUrl": "http://127.0.0.1:4966/app/?demo=rhl&reset=1",
+    "boardUrl": "http://127.0.0.1:4966/board/?demo=reset#key=demo-employee",
+    "phoneVmUrl": "http://10.0.2.2:4966/app/?demo=rhl&reset=1 (the phone-VM guest reaches the host loopback at 10.0.2.2)",
+    "healthUrl": "http://127.0.0.1:4966/api/demo/health (served index/asset hashes for binding)",
+    "resets": "?demo=reset on the board rewrites its stored demo data; &reset=1 on the app restores its demo seed; demo-up.sh wipes and re-seeds the demo library data dir",
+    "librarySource": "/home/cayleb/workspace/frontend-reiteration/suite/library (DEMO_LIBRARY_SRC overrides; the real service code, never the live company library on 8737)",
+    "staticPublication": "the same site tree works with no server-side API (proven 8/8): the Library shows the frozen demo-library snapshot labelled \"Static publication: this page carries a frozen snapshot of the demo library\", and Build the skill replays the publication into that snapshot. The local demo host always uses the real library review gate."
+  },
+  "demoDataset": {
+    "name": "rhl-warehouse-worker-demo-v1 (Ticket 099 demo set, refreshed onto the current build)",
+    "board": "demo backend, TEST rows (VITE_BACKEND=demo, 14 TEST jobs, demo line F)",
+    "library": "isolated demo instance/fixtures (library service on its own data dir/port 8751)",
+    "call": "scripted transcript, no telephony"
+  },
+  "beats": [
+    {
+      "id": "1",
+      "action": "Chat: tap the composer field, type \"Call the truck company about the dump and get a slot tomorrow morning.\", tap Send",
+      "expect": "a SIMULATED call card to Lord's Haulage plays six scripted turns (≈14 s), the card ends \"call ended · 00:14\" and the notice \"DMP-4471 booked · Lord's Haulage · 07:30 tomorrow · 2 pallets banded\" appears; then the job card \"Lord's Haulage — dump run\" with Reference DMP-4471 and Collection Tomorrow 07:30"
+    },
+    {
+      "id": "2",
+      "action": "Board tab: tap Board, wait for the board to boot inside the app, tap the board search/command field inside the iframe, type \"add this job to line F\", press Enter",
+      "expect": "notice \"DMP-4471 added to line F — Pulled from the call · full details on the job card\"; the job \"TEST Lord's Haulage — dump run DMP-4471\" appears on line F of the running board; board strip says \"Live board · demo data only · not the live RHL board\""
+    },
+    {
+      "id": "3",
+      "action": "Chat → offer card: tap Chat, wait for the offer \"Add “dump-run-intake” to the company library for the warehouse operator role?\", tap \"Build the skill\"",
+      "expect": "the published skill card \"dump-run-intake v0.1.0 · company library · warehouse operator · published\" and the notice \"Skill published\"; the Library tab then shows \"Chosen for your role 3\" with dump-run-intake marked \"new\" beside the two seeded warehouse skills, and \"Shared company-wide 4\""
+    }
+  ],
+  "deviationsDetail": [
+    {
+      "id": "D1",
+      "item": "merge base",
+      "deviation": "used m-0185/.scratch/basetest/src (9 Nov 13:53 round-6 snapshot) as the three-way base instead of missions/m-0185/work/worker-1/build/src",
+      "why": "build/src is the round-7 tree delivered 10 Nov, after the 099 demo layer was cut; merging from it would treat round-7 fixes as demo edits and revert them. The basetest snapshot is the exact tree the demo layer was cut from (identical file list minus the 4 demo files). Every current-build change is kept."
+    },
+    {
+      "id": "D2",
+      "item": "demo files with no demo content",
+      "deviation": "the 099 copies of components/ApprovalCard.tsx, views/Tasks.tsx and styles/tokens.css were not applied; the current build versions are kept",
+      "why": "those diffs are round-6 source state, not demo-layer changes (no DEMO/RHL/board/library references in them); applying them would revert round-7/polish fixes. app.css/Thread.tsx port only the demo-specific hunks on top of the current files."
+    },
+    {
+      "id": "D3",
+      "item": "board hand-off global",
+      "deviation": "renamed window.ergon → window.rhlAgent and message type ergon.agent.command → rhl.agent.command in the app and the rebuilt board",
+      "why": "the global name is served JavaScript and contains \"ergon\"; the zero-occurrence requirement outranks keeping the documented global name in a demo build. Both sides renamed together; the hand-off semantics are unchanged."
+    },
+    {
+      "id": "D4",
+      "item": "board served agent docs",
+      "deviation": "agent.json/agent-tools.json in the served board carry \"warehouse_board\" where they carried \"ergon_warehouse\"",
+      "why": "same zero-occurrence requirement on served bytes; these files describe the live Supabase surface, which this demo build never contacts. The live schema is untouched."
+    },
+    {
+      "id": "D5",
+      "item": "library static fallback",
+      "deviation": "the Library view gains a frozen-snapshot fallback (and a satisfying replay of Build the skill) for the static publication",
+      "why": "the public host (GitHub Pages) has no demo API; without this the Library beat shows an error on the published pack. The local demo host still exercises the real library review gate — video evidence is taken on it. The fallback is labelled on the surface (\"Static publication: this page carries a frozen snapshot of the demo library\")."
+    },
+    {
+      "id": "D6",
+      "item": "site layout",
+      "deviation": "app is served at /app/ and the board at /board/ (099 served the app at the root); the board iframe src is ../board/",
+      "why": "the publisher needs a page at the site root; a subpath tree with relative roots is also what GitHub Pages requires. No absolute /assets or /board refs remain."
+    },
+    {
+      "id": "D7",
+      "item": "board source",
+      "deviation": "board rebuilt from missions/m-0240/work/build/board-src (per the assignment), with base \"./\" and de-brand patches added",
+      "why": "subpath portability + zero served \"ergon\"; board function/data unchanged (VITE_BACKEND=demo, 14 TEST rows)."
+    },
+    {
+      "id": "D8",
+      "item": "demo clock vs brief date",
+      "deviation": "the demo brief keeps its \"Morning brief — Mon 9 Nov\" demo copy while the app clock seeds at the current build’s demo clock (Sun 8 Nov 12:00), so thread turns show 12:00",
+      "why": "both are demo content from the 099/108 demo data; the current build’s one-clock fidelity is kept rather than reverting to the older fixtures. Cosmetic only; no brand/fence/AI claim affected."
+    },
+    {
+      "id": "D9",
+      "item": "page not generated",
+      "deviation": "pack/site has no index.html yet",
+      "why": "the public page (and its walkthrough player) is the publisher’s deliverable (coordination rule: generated page named separately, not a delivered-dist file); the demo host falls back to /app/?demo=rhl until the publisher writes it."
+    }
+  ],
+  "manifestVersion": 1,
+  "ticketLabel": "slack:195 — Ergon demo pack refresh",
+  "mission": "m-0327",
+  "role": "builder (worker 2)",
+  "deliverable": "pack/BUILD-MANIFEST.json",
+  "generatedAt": "2026-11-12T13:37:14.063Z",
+  "summary": "De-branded RHL warehouse-worker demo pack rebuilt from the current 068 dark front-end build (m-0258 dist-r6 / code head 513d1c66) with the Ticket 099 demo layer ported onto it, plus the RHL board rebuilt from m-0240 board-src with VITE_BACKEND=demo and TEST rows. Zero case-insensitive \"Ergon\" in every served byte. Demo data only.",
+  "site": {
+    "rootDirectory": "pack/site",
+    "rootServedAt": "site root (e.g. https://<host>/<repo>/ )",
+    "page": {
+      "path": "index.html",
+      "present": false,
+      "owner": "publisher (worker 4)",
+      "note": "generated landing/walkthrough-player page; NOT a delivered-dist file, named separately from the dist byte-equality set (coordination rule 3)"
+    },
+    "app": {
+      "path": "app/",
+      "entry": "app/index.html",
+      "urlPath": "/app/?demo=rhl",
+      "note": "the de-branded demo phone app; desktop face exists at wide viewports but the demo runs on the phone face"
+    },
+    "board": {
+      "path": "board/",
+      "entry": "board/index.html",
+      "urlPath": "/board/?demo=reset#key=demo-employee",
+      "inAppIframeSrc": "../board/?demo=reset#key=demo-employee"
+    },
+    "footage": {
+      "path": "footage/",
+      "expectedVideo": "walkthrough-phone.mp4",
+      "owner": "videographer (worker 3)",
+      "note": "W3 writes the one-continuous phone-VM take; W4 publishes the bytes unmodified"
+    },
+    "subpathPortable": true,
+    "relativeRootsOnly": true,
+    "relativeRootsNote": "both Vite builds use base \"./\"; the app loads ./assets/… and its board iframe uses ../board/… so the tree works unchanged under a GitHub Pages /<repo>/ prefix",
+    "nonDistFiles": [
+      {
+        "path": "index.html",
+        "owner": "publisher (worker 4)",
+        "role": "generated page — not part of the dist byte-equality set"
+      },
+      {
+        "path": "footage/walkthrough-phone.mp4",
+        "owner": "videographer (worker 3)",
+        "role": "recorded take — not a dist file"
+      },
+      {
+        "path": ".nojekyll",
+        "owner": "publisher (worker 4)",
+        "role": "GitHub Pages marker"
+      }
+    ]
+  },
+  "fileBytesAndSizes": {
+    "app/assets/index-DCmS6Iha.js": {
+      "bytes": 480754,
+      "sha256": "ab4aecddc85394ed818cc98ca65b3d54e75a0571d81ce2db463e9c0189a59a97"
+    },
+    "app/assets/index-yfHjJhRj.css": {
+      "bytes": 107273,
+      "sha256": "6633ad7b51709f957a733147b80ad56dd58dd7cbdc41156990bb397b71a60622"
+    },
+    "app/favicon.svg": {
+      "bytes": 351,
+      "sha256": "9a111f03a97d493992665b03e828aa74e087b3ae3525ea9de19c0347c143e0e5"
+    },
+    "app/fonts/Geist-Medium.ttf": {
+      "bytes": 127660,
+      "sha256": "0090e004725f6f64b841715b4167920580f883fcf9b67fc6d744089103fec101"
+    },
+    "app/fonts/Geist-OFL.txt": {
+      "bytes": 4368,
+      "sha256": "930853ee1daa68554d9e35c8a9175affb74f699fad9a5da6ee5ebe76379d9137"
+    },
+    "app/fonts/Geist-Regular.ttf": {
+      "bytes": 126048,
+      "sha256": "5c8968eafb98a4c4f47033daf29e38e284a6f2a82eb017d171ab040fe7c4b615"
+    },
+    "app/fonts/Geist-SemiBold.ttf": {
+      "bytes": 127872,
+      "sha256": "612ec98df33935354f39e81e54101656961ab6e5549f64b63eb57868ba7bab8d"
+    },
+    "app/fonts/GeistMono-Bold.ttf": {
+      "bytes": 78304,
+      "sha256": "75c0828d5c1ee44b9ef9f4df577bf41595ec362e2ea3f1e558590c9e92c7949d"
+    },
+    "app/fonts/GeistMono-OFL.txt": {
+      "bytes": 4481,
+      "sha256": "0acca17d633ecc7180aa12d8a60a95889d87a439cb83884597ff278046743dcb"
+    },
+    "app/fonts/GeistMono-Regular.ttf": {
+      "bytes": 78232,
+      "sha256": "a55c1b51cda4afeab9e471e7947b85a20f7c8831d7e6b1470c1b7fbdc0f0f15e"
+    },
+    "app/index.html": {
+      "bytes": 606,
+      "sha256": "6c4f1e96363681fa2c413b45777eb3db02f627a6e2586f97f21dfc2929b5a324"
+    },
+    "board/agent-tools.json": {
+      "bytes": 21075,
+      "sha256": "2a5a99039d01c8296299dc7eed003415511965bb0fc770de4fd1f390aaa134ae"
+    },
+    "board/agent.json": {
+      "bytes": 5008,
+      "sha256": "ecc73efea6592c69663f8c8644c0a4f7056d34550dc1a794c0f769ccf969d1f9"
+    },
+    "board/assets/DemoKeys-D5RwAwxA.js": {
+      "bytes": 488,
+      "sha256": "44a01550c3470d1694e93764e008b19b2bd800404d7a703bf2314a56a1f6a1da"
+    },
+    "board/assets/button-PUoX5M7c.js": {
+      "bytes": 31391,
+      "sha256": "de758afbd7e2e54efab0873f833048d89e7bc634290f44e28a444b32421d19fe"
+    },
+    "board/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2": {
+      "bytes": 7420,
+      "sha256": "2317fa4bb293c9c0b110e18315d529235c47a0ddd3338cea3d8c7955e927899e"
+    },
+    "board/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2": {
+      "bytes": 15084,
+      "sha256": "6894439694946a589d157ece003086960a6a4013d74a813dab7602efdb3d8c09"
+    },
+    "board/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2": {
+      "bytes": 16512,
+      "sha256": "824f485b5d26e2f2da3c2b236132ece1bc8e4e43373452950bb0e40548b4313f"
+    },
+    "board/assets/geist-latin-wght-normal-BgDaEnEv.woff2": {
+      "bytes": 29400,
+      "sha256": "19f9c92546aa300c312235e3125af1b81394d8db9a4bc4a425cd5b641d2d54e1"
+    },
+    "board/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2": {
+      "bytes": 8004,
+      "sha256": "8fa40e5d248247735eb97a0bd593b8852440430600d6ba01364c31fe0abc1fe1"
+    },
+    "board/assets/main-BH4w1_Y5.js": {
+      "bytes": 380241,
+      "sha256": "385f6bc4c826195e07cd575b0e100ec04fa28a4190116bb853c8895fa046019d"
+    },
+    "board/assets/main-s2yyMUud.css": {
+      "bytes": 34255,
+      "sha256": "9328392efd812bd57c6e645c881da3c0c81409d89c0c2081653361d6fe0da840"
+    },
+    "board/index.html": {
+      "bytes": 1544,
+      "sha256": "424f69eaf389fa89d30557e39663c9167e741f6267074a91e57966d6adb0429c"
+    },
+    "board/rhl-logo-light.svg": {
+      "bytes": 9803,
+      "sha256": "c517a61a208a20ee1f2c0d6c2d5d6783ca3350ccc27558dca7c2879ed15a3849"
+    },
+    "board/rhl-logo.svg": {
+      "bytes": 9879,
+      "sha256": "be5903929c0ee2c9e0523f34a3e00f8bb96217eb2c2d271265ade664e99444e0"
+    }
+  },
+  "fileCount": 25,
+  "totalBytes": 1706053,
+  "frozenBuild": {
+    "name": "Ergon front end — final polish build (Ticket 123 / m-0258 dist-r6)",
+    "chosenBy": "worker-1 pack-auditor (audit/PACK-AUDIT.md §2)",
+    "provenance": {
+      "distPath": "missions/m-0258/work/polish/dist-r6",
+      "indexHtmlSha256": "43b1943d2e0807c863ae88d573961ea02abd70fb97aedebd79ea73d33ef7c4f6",
+      "bundleJs": {
+        "file": "assets/index-DTQ8GvEU.js",
+        "sha256": "558584531bf5d7f543328603e003000c09779746df139a44de458635a1279513"
+      },
+      "bundleCss": {
+        "file": "assets/index-CjDlgqeX.css",
+        "sha256": "177f49b5a8efd661409782f7f4e5cee30da8c645e54570b3eb1c72d42f9b3990"
+      },
+      "sourceRepo": "cayleb-james2008/ergon",
+      "branch": "frontend/ergon-068-house-checks",
+      "codeHead": "513d1c666f7d49d38f9a476407a47997192770e9",
+      "docsHead": "1a32ed928be20400a57e288586a75c52ccb57917",
+      "remoteHeadPushed": "1a32ed928be20400a57e288586a75c52ccb57917",
+      "gitTree": "97750d95afd3c7543ce4e02b97acce8e578b6e85"
+    },
+    "frozenCopy": {
+      "path": "missions/m-0327/work/worker-1/audit/current-build/",
+      "distIndexSha256": "43b1943d2e0807c863ae88d573961ea02abd70fb97aedebd79ea73d33ef7c4f6",
+      "freezeDigest": "77fadf0a53c7a406b4f5a2be05873fa288aa29c5025932347047e66049188e60",
+      "verify": "bash missions/m-0327/work/worker-1/audit/current-build/verify-freeze.sh (FREEZE OK: 74 files)"
+    },
+    "sourceBaseUsedByBuilder": "audit/current-build/src (frontend tree at code head 513d1c66); every app source file the builder did not touch is byte-identical to that frozen tree (0 mismatches checked)",
+    "olderBuildsNotShipped": [
+      {
+        "name": "Ticket 068 delivered build (m-0185 round 7)",
+        "indexSha256": "e15e7bfc153cea160861afc0e009bdd2f1589c59ea73ffa9e24cb0bfda589868"
+      },
+      {
+        "name": "Ticket 108 widened build (m-0240)",
+        "indexSha256": "7c08f3fb9962fdade45e0f9bddb5d562126faaad9d744456630c29d98a592fcb"
+      },
+      {
+        "name": "Ticket 099 demo app (the pack being refreshed)",
+        "indexSha256": "f6bc70cf9f6a859b02206c6bd134630b0d6d543f156a0af0b41ee50125130db4"
+      }
+    ],
+    "rebuiltIndexSha256": {
+      "app": "6c4f1e96363681fa2c413b45777eb3db02f627a6e2586f97f21dfc2929b5a324",
+      "board": "424f69eaf389fa89d30557e39663c9167e741f6267074a91e57966d6adb0429c"
+    },
+    "rebuiltDiffersFrom": "every older build and from the 099/108 packs — this is a new build on the current source, never the old build re-shipped"
+  },
+  "rebuild": {
+    "app": {
+      "source": "pack/app-src (current build source + ported Ticket 099 demo layer, de-branded)",
+      "mergeBase": "missions/m-0185/work/.scratch/basetest/src — the round-6 source snapshot at 9 Nov 13:53, the tree the 099 demo layer was cut from (exact base; see merge.note)",
+      "command": "cd pack/app-src && npx vite build",
+      "node": "v26.13.0",
+      "vite": "8.3.5",
+      "output": "pack/app-src/dist → copied verbatim to pack/site/app",
+      "distIndexSha256": "6c4f1e96363681fa2c413b45777eb3db02f627a6e2586f97f21dfc2929b5a324"
+    },
+    "board": {
+      "source": "pack/board-src (rebuilt from missions/m-0240/work/build/board-src; de-branded for served bytes)",
+      "backend": "VITE_BACKEND=demo (in-browser TEST data; no network, no Supabase)",
+      "command": "cd pack/board-src && VITE_BACKEND=demo npx vite build",
+      "output": "pack/board-src/dist → copied verbatim to pack/site/board",
+      "distIndexSha256": "424f69eaf389fa89d30557e39663c9167e741f6267074a91e57966d6adb0429c",
+      "testRows": "14 TEST jobs across lines A–S in src/data/demo.js; the demo line is F"
+    },
+    "sourceInputsSha256": {
+      "app": {
+        "src/App.tsx": {
+          "bytes": 1684,
+          "sha256": "a71c4aaf85dc76d136b2639dcf7eb020e65e3bc63d524c5c1465154cb78ff536"
+        },
+        "src/components/ApprovalCard.tsx": {
+          "bytes": 4718,
+          "sha256": "95c55c6fdd4cc61853faf330cee6ac68d4a4ed66f09a19c8c312da47dd9bfc7a"
+        },
+        "src/components/Composer.tsx": {
+          "bytes": 1602,
+          "sha256": "9a124ec4ef7da0a7838fd757aee18ddfc150c8ee043846002c151a0735e1a99c"
+        },
+        "src/components/DemoCards.tsx": {
+          "bytes": 3552,
+          "sha256": "6b517b38b50b506e1d2297ae741eeb029a4af542c453c9f6a3cf6e1a709b92dd"
+        },
+        "src/components/Diagrams.tsx": {
+          "bytes": 5429,
+          "sha256": "39fed3161bce69208d4cbf122da7e7414e0e26b41e59bc24144639707660fc45"
+        },
+        "src/components/HoldToSend.tsx": {
+          "bytes": 3679,
+          "sha256": "eac5c930784d13acc24ff88ef392b8f58093ed85b2ecbcd0fb2e0503b5e2750a"
+        },
+        "src/components/PresenceMark.tsx": {
+          "bytes": 2049,
+          "sha256": "8fb5d0fc5ef74a4252c0e4828d243dd36d34bae0fd44063bec67877e0fc80b05"
+        },
+        "src/components/StatePill.tsx": {
+          "bytes": 752,
+          "sha256": "9cc358e357ec2345b79750402344650bc11ffbc1929edc145de38b203f14ede5"
+        },
+        "src/data/demo.ts": {
+          "bytes": 5135,
+          "sha256": "79c78b117d2f857429221bc9fc3067bf2914eac765b524b75ce086d013e975b7"
+        },
+        "src/data/fixtures.ts": {
+          "bytes": 14073,
+          "sha256": "50cb5ae081ed619ef60e4593647182dd3a39e58cd8cf731223b6e268788434dd"
+        },
+        "src/data/store.ts": {
+          "bytes": 20809,
+          "sha256": "640ec96fbe4da7a4d0c3dd03cbeb6220de023d3715e7ff74c38abd42b192f421"
+        },
+        "src/faces/Desktop.tsx": {
+          "bytes": 6644,
+          "sha256": "00bba6339aa6276acf74feab234800444b201f16233ff5fd476290bc7b0dc203"
+        },
+        "src/faces/Mobile.tsx": {
+          "bytes": 10344,
+          "sha256": "31371950ef8bf726d2f47aeff0db7ac7fd5f82a041b987b8c4b0ac4926bf84a7"
+        },
+        "src/main.tsx": {
+          "bytes": 236,
+          "sha256": "bed1cad688bec6014827ae5f69eba2f81ebd17b03fe6fae07feb5fbd11fcb578"
+        },
+        "src/motion.ts": {
+          "bytes": 5483,
+          "sha256": "b17ec2fb48edb4ef5a6d2b6c6e0777b69eaa331f0ab34523195438f90582bc83"
+        },
+        "src/styles/app.css": {
+          "bytes": 48233,
+          "sha256": "07eb834728a13f5c58abb099be2a82b3835ee2b82eefc784d3c803ed6d9cbad5"
+        },
+        "src/styles/fonts.css": {
+          "bytes": 1083,
+          "sha256": "5792b859bf6af5708609844d718f4870ea2506123bbe64c07ca3808eae08327b"
+        },
+        "src/styles/retoken.css": {
+          "bytes": 1009,
+          "sha256": "62c10d0ee6720b3e80afa2c7c608765afaf09d6c8ce60b04a151e1e4c38f7c77"
+        },
+        "src/styles/tokens.css": {
+          "bytes": 4150,
+          "sha256": "4455e298c330f2a4377f18936006a8354bb66c1ff7dd2d69aef20d64bbe7a08e"
+        },
+        "src/vendor/PATCHES.json": {
+          "bytes": 1093,
+          "sha256": "08a0b3eebb7c2457c672460443ebcb13d082562ec8679b7023421d3f52ce768f"
+        },
+        "src/vendor/alias/helpers/classname-helper.ts": {
+          "bytes": 29,
+          "sha256": "ff2d99602e671964fa93da1bf3d3ede0a4ce0450a10908bdecc2868d3f71d265"
+        },
+        "src/vendor/alias/hooks/useClickOutside.tsx": {
+          "bytes": 755,
+          "sha256": "a239b751802f4a67e13d962bdf18118f7b24c7806a3f2ab3c41eca199d624445"
+        },
+        "src/vendor/alias/hooks/usePreventScroll.tsx": {
+          "bytes": 12254,
+          "sha256": "5005e7adccc89cde10c01f85ffcee3b4e468ab668bc04a614283ca25f1a8047b"
+        },
+        "src/vendor/alias/lib/utils.ts": {
+          "bytes": 169,
+          "sha256": "9304a861c8673bee09e0f12de31773abbde503b02e59dfd74763ddec2e37cf05"
+        },
+        "src/vendor/kitchen/TactileButton.tsx": {
+          "bytes": 4902,
+          "sha256": "d63a67c596c40b534dfb45ac398dc1ff25771293eef4fb8f5887e6ac11620e43"
+        },
+        "src/vendor/kitchen/helpers/classname-helper.ts": {
+          "bytes": 29,
+          "sha256": "ff2d99602e671964fa93da1bf3d3ede0a4ce0450a10908bdecc2868d3f71d265"
+        },
+        "src/vendor/kitchen/styles/colors.css": {
+          "bytes": 2523,
+          "sha256": "e97a17d90ce1e281368c88a473e3d8b6c1c7e6602c10e426c0995f4653be420d"
+        },
+        "src/vendor/kitchen/styles/globals.css": {
+          "bytes": 1591,
+          "sha256": "783ef5c45e4c856f0a4f0f45282ad705902336046fe260d8f2e5848c600efdf8"
+        },
+        "src/vendor/kitchen/styles/theme.css": {
+          "bytes": 12720,
+          "sha256": "377e395eebd038893ea9013c569ddabb8384a4e2a585098a2269d2a18eece96e"
+        },
+        "src/vendor/mp/animated-number.tsx": {
+          "bytes": 828,
+          "sha256": "3b4a9f3262cb79527fba01a76576e920e340137f0643bf34a7732f7f8b1ff792"
+        },
+        "src/vendor/mp/dock.tsx": {
+          "bytes": 5625,
+          "sha256": "5b624424f0fd8b66f174ecbd4e0d8c260f438d933963126bf34298eadcebf719"
+        },
+        "src/vendor/mp/lib/utils.ts": {
+          "bytes": 169,
+          "sha256": "9304a861c8673bee09e0f12de31773abbde503b02e59dfd74763ddec2e37cf05"
+        },
+        "src/vendor/mp/morphing-dialog.tsx": {
+          "bytes": 10665,
+          "sha256": "9e48fcbd7d007da2394f4f8e3e30a6cae251e8eabfabc6fe5b020aa84ad89d0c"
+        },
+        "src/vendor/mp/text-morph.tsx": {
+          "bytes": 1841,
+          "sha256": "e3839272d22e1b041378263019d0716a29a8b99656b64eb385b66402698c9294"
+        },
+        "src/vendor/mp/transition-panel.tsx": {
+          "bytes": 1015,
+          "sha256": "1b3c67058a09a560a034b7fe52ad1c205b589a63ed80055900e8a66830db0be2"
+        },
+        "src/vendor/mp/useClickOutside.tsx": {
+          "bytes": 755,
+          "sha256": "a239b751802f4a67e13d962bdf18118f7b24c7806a3f2ab3c41eca199d624445"
+        },
+        "src/vendor/mp/usePreventScroll.tsx": {
+          "bytes": 12254,
+          "sha256": "5005e7adccc89cde10c01f85ffcee3b4e468ab668bc04a614283ca25f1a8047b"
+        },
+        "src/vendor/patches/morphing-dialog.a11y.patch": {
+          "bytes": 2562,
+          "sha256": "67614b56a38a2dddfb5be82761fd13289be8ff58d5feb8e6004c05fa324ee7c8"
+        },
+        "src/views/AppCanvas.tsx": {
+          "bytes": 3163,
+          "sha256": "720b1ea9ac1b9226659dcdfd86ee0fb1baf2def0ce0f21b9bfe0842b3843145e"
+        },
+        "src/views/Board.tsx": {
+          "bytes": 2201,
+          "sha256": "034926dc605a918598d1274257240a233b8fd3e1c957a2e9ab90ff49b5e3d57e"
+        },
+        "src/views/Decisions.tsx": {
+          "bytes": 3962,
+          "sha256": "bc8eaa94f805da829d78cc9ef89563e6d58c7ad04608876284cd93a82ed932ba"
+        },
+        "src/views/Library.tsx": {
+          "bytes": 4224,
+          "sha256": "0ab2fad6488dc8e904d63e7b00667480ce1322c50201443d82184c8828d94014"
+        },
+        "src/views/Make.tsx": {
+          "bytes": 1448,
+          "sha256": "ab4da3a262a5697a1ce905a32be691ab8c96d98ed4a12904f1ecf449d2e09793"
+        },
+        "src/views/Settings.tsx": {
+          "bytes": 6263,
+          "sha256": "790c0c00a52f61d2a3f752c8e2beb97046129389469f52f9911bbad3b0d48946"
+        },
+        "src/views/Tasks.tsx": {
+          "bytes": 8518,
+          "sha256": "4ab71f67cd49a9f858db893db254fe1b4cf9f93acf6e35be6a3c6c6eacdd2aad"
+        },
+        "src/views/Thread.tsx": {
+          "bytes": 6495,
+          "sha256": "9fb8f9f75960b6d9d695a75e01fcf90fe02ac695952bd85680aca71bc1e27031"
+        },
+        "index.html": {
+          "bytes": 505,
+          "sha256": "0b3100653e29ba97c70dcdceea5521df0f789364e91ad89ea00fd9a733c817cb"
+        },
+        "package.json": {
+          "bytes": 880,
+          "sha256": "fe9306a7485fab13e030f09e5a4604a251a00d5598d4b57d55738e853b54e15d"
+        },
+        "vite.config.mjs": {
+          "bytes": 706,
+          "sha256": "5570a0348a7a625f87891dfafa7b4d10efde86d677b9d41063204121001f89c2"
+        },
+        "postcss.config.cjs": {
+          "bytes": 62,
+          "sha256": "acab75e89ab7163984a562922104f200bbee46cfca9fd88809961f58f99d3525"
+        },
+        "tsconfig.json": {
+          "bytes": 345,
+          "sha256": "d2c81fad8879adf0a741be6714962fdb3f0972fb3471b5e1d931732fb074142a"
+        },
+        "public/favicon.svg": {
+          "bytes": 351,
+          "sha256": "9a111f03a97d493992665b03e828aa74e087b3ae3525ea9de19c0347c143e0e5"
+        },
+        "public/fonts/Geist-Medium.ttf": {
+          "bytes": 127660,
+          "sha256": "0090e004725f6f64b841715b4167920580f883fcf9b67fc6d744089103fec101"
+        },
+        "public/fonts/Geist-OFL.txt": {
+          "bytes": 4368,
+          "sha256": "930853ee1daa68554d9e35c8a9175affb74f699fad9a5da6ee5ebe76379d9137"
+        },
+        "public/fonts/Geist-Regular.ttf": {
+          "bytes": 126048,
+          "sha256": "5c8968eafb98a4c4f47033daf29e38e284a6f2a82eb017d171ab040fe7c4b615"
+        },
+        "public/fonts/Geist-SemiBold.ttf": {
+          "bytes": 127872,
+          "sha256": "612ec98df33935354f39e81e54101656961ab6e5549f64b63eb57868ba7bab8d"
+        },
+        "public/fonts/GeistMono-Bold.ttf": {
+          "bytes": 78304,
+          "sha256": "75c0828d5c1ee44b9ef9f4df577bf41595ec362e2ea3f1e558590c9e92c7949d"
+        },
+        "public/fonts/GeistMono-OFL.txt": {
+          "bytes": 4481,
+          "sha256": "0acca17d633ecc7180aa12d8a60a95889d87a439cb83884597ff278046743dcb"
+        },
+        "public/fonts/GeistMono-Regular.ttf": {
+          "bytes": 78232,
+          "sha256": "a55c1b51cda4afeab9e471e7947b85a20f7c8831d7e6b1470c1b7fbdc0f0f15e"
+        }
+      },
+      "board": {
+        "src/App.jsx": {
+          "bytes": 12911,
+          "sha256": "3ce0e38d5b7355f0e036d470e346280ee3df3a46872d24e1f55dad2beee9f70d"
+        },
+        "src/components/Banners.jsx": {
+          "bytes": 903,
+          "sha256": "335ad016ffdb8dbe5a259967d9cf07b0e3bd184d093fe59bfea2ad31ee98d82a"
+        },
+        "src/components/BayMarker.jsx": {
+          "bytes": 220,
+          "sha256": "5f9fdba586c5b78a908931bd35977ab389d71ceeb5fcbb26dc56bf8215cf3cdd"
+        },
+        "src/components/Board.jsx": {
+          "bytes": 5444,
+          "sha256": "3fd34cffd3c1051c423eb6cd3db285244ef9e4f8bec3b741b9fbeb57da167bbe"
+        },
+        "src/components/Bubble.jsx": {
+          "bytes": 3182,
+          "sha256": "1a386349d0a46dbe3ade232b6960bc55679eafd3f133b6eff7e3423e35624f11"
+        },
+        "src/components/DemoKeys.jsx": {
+          "bytes": 738,
+          "sha256": "6c567782ebc5ae0b1988f13296d168261758cd57e3ba13fdf00684f4807aa14c"
+        },
+        "src/components/DragHandle.jsx": {
+          "bytes": 1541,
+          "sha256": "167ec08f50cc3b02a0eec88af97ad21a4e75ea360607015ed32308d0a3ee3edc"
+        },
+        "src/components/Header.jsx": {
+          "bytes": 3408,
+          "sha256": "95c6564e37c8a93989ca2c1ab77e750cd000b3900367f977fb8ed15010380e65"
+        },
+        "src/components/InlineAdd.jsx": {
+          "bytes": 1626,
+          "sha256": "b1d48e618b9b6b4347bb12d499756ff05d6b7873b9c6ec97a067831863019442"
+        },
+        "src/components/Job.jsx": {
+          "bytes": 4355,
+          "sha256": "d76468979a3925b18d1356ab2b8da4f352a090603cf02cf4ed68ad526073e539"
+        },
+        "src/components/JobDialog.jsx": {
+          "bytes": 1169,
+          "sha256": "dac5fe15dd4334349be47065aabb66dfcb29ac0e770874d8ec2ea86f929ed15e"
+        },
+        "src/components/JobForm.jsx": {
+          "bytes": 8763,
+          "sha256": "969f200d2e54c914c58246144921d531092ab813b8a6a4fe375b84df81be4aac"
+        },
+        "src/components/KeyChip.jsx": {
+          "bytes": 1103,
+          "sha256": "a51885bc679919ed377179ff59c01454a423f54a86667d283c16917023ec81e5"
+        },
+        "src/components/KeyNotice.jsx": {
+          "bytes": 884,
+          "sha256": "d5646b19835fca98f3104c119572758efc38da628a371b0bdc3ba11cb60e8e1f"
+        },
+        "src/components/StatusBadge.jsx": {
+          "bytes": 884,
+          "sha256": "97720435e1dd054bd051699af41032d9b0ff772524bb4f78f09a604bc997e8fb"
+        },
+        "src/components/ui/alert.jsx": {
+          "bytes": 853,
+          "sha256": "fb435f468f3cbb38db6e04fba70f27960f4c6360d9cc145f1a5e4fc1cf59442f"
+        },
+        "src/components/ui/badge.jsx": {
+          "bytes": 306,
+          "sha256": "241e1977a3df118f5dcf714dc280f572b4cf82fc044376412800780ec6fb5ff7"
+        },
+        "src/components/ui/button.jsx": {
+          "bytes": 1628,
+          "sha256": "52b1ffe6eb898e563abfd55402527617b47cc0ad329a01e82ca06ae80dd6c501"
+        },
+        "src/components/ui/dialog.jsx": {
+          "bytes": 1043,
+          "sha256": "f89a613ae59eab5b4609a073886f93df2369b22b5759825dfa94655e072c323f"
+        },
+        "src/components/ui/input.jsx": {
+          "bytes": 716,
+          "sha256": "e774c727293350ec03eb3e4b98f94539dab03c0174a24c38857ab89638ed01cb"
+        },
+        "src/components/ui/label.jsx": {
+          "bytes": 180,
+          "sha256": "59406a5be4930044c48336ed3c8be5a1cb9dc6d91ceb6831adbd3d9371dc86b7"
+        },
+        "src/components/ui/popover.jsx": {
+          "bytes": 884,
+          "sha256": "fb3efbc02b0b5094956f47ddec6d6070712dd2c8e69c5fd0102b42f96bb3d7ac"
+        },
+        "src/components/ui/portal-container.js": {
+          "bytes": 375,
+          "sha256": "115aa87f5cd1846ca08cef802478690546b6ba66b1a6ae1e4c0b1508b35bacc9"
+        },
+        "src/components/ui/select.jsx": {
+          "bytes": 3491,
+          "sha256": "20e77e0e55fd67342b0326acafc8419b5749742f126f267f8fe4e1287b419a18"
+        },
+        "src/components/ui/skeleton.jsx": {
+          "bytes": 215,
+          "sha256": "646695fc7dc71a1dc8be4de12ac9861b34060f6f0e2da3b49a061d234465b172"
+        },
+        "src/components/ui/tooltip.jsx": {
+          "bytes": 791,
+          "sha256": "03a692ea35944e10151d0e4bcfb54edf2d18b7391f79a017eeaca3529af5a60c"
+        },
+        "src/config/legend.json": {
+          "bytes": 657,
+          "sha256": "4d2d7ceef3e487b457fc43de63f79787980dc865980641b98d385486e324561e"
+        },
+        "src/config.js": {
+          "bytes": 850,
+          "sha256": "ba47aa99448dc3a0f37bde4b7ed119e34eafa32f775dfe2652b1214f82802fd4"
+        },
+        "src/core/connection.js": {
+          "bytes": 1566,
+          "sha256": "08e7e724a71404e2fb74befe77231dbca987bf48e3b054b5a8da3131012e1916"
+        },
+        "src/core/density.js": {
+          "bytes": 1533,
+          "sha256": "818033aed6a9f13e16d99356d99652a233dde49798ee9065118a61930714ce40"
+        },
+        "src/core/handoff.js": {
+          "bytes": 636,
+          "sha256": "3930d69706eeef0516ac50e7367e7c9c27bd92259ddbd0bd9a1227c96074ebd7"
+        },
+        "src/core/key.js": {
+          "bytes": 5123,
+          "sha256": "7e12e84dcabdfd3fa5ab6f2d129c8d3f0ad33d2769c362cda72f3bfc3d7ec41f"
+        },
+        "src/core/legend.js": {
+          "bytes": 546,
+          "sha256": "7ed356f3582eb9d4e69f277960f6a8db3d20e0eaf8b7ab8f37897372afb8b286"
+        },
+        "src/core/lines.js": {
+          "bytes": 1957,
+          "sha256": "b8b556b50759783e4f9533d4620ffdeec28e768a41fcfec2df4732d97136307d"
+        },
+        "src/core/store.js": {
+          "bytes": 10943,
+          "sha256": "c0d0cf82936bf537d0cf292066217ed87f660018df22c154eef84450ff5ac435"
+        },
+        "src/core/uuid.js": {
+          "bytes": 486,
+          "sha256": "ee2f989ddbaaf8f24f6be633f86180c34be4550b17e916db915f184617193ba8"
+        },
+        "src/data/backend-demo.js": {
+          "bytes": 233,
+          "sha256": "bb5688b30bcb7d3b236613a4452b2447ee0923483f6c1864f0f07c18edc83371"
+        },
+        "src/data/backend-supabase.js": {
+          "bytes": 245,
+          "sha256": "460cba2851f1326d69bddd30385d80882f847ced27cd9c8487710821842e5fb5"
+        },
+        "src/data/demo.js": {
+          "bytes": 8671,
+          "sha256": "15f261466dd8dd08cd6267c1044b7c1c070ddc37325d180a43cef17ddc31f81f"
+        },
+        "src/data/index.js": {
+          "bytes": 276,
+          "sha256": "a54f1b28e963f8768e36cebf391bc42c8aca9a29ce402ce52b58c42065109dc9"
+        },
+        "src/data/supabase.js": {
+          "bytes": 7184,
+          "sha256": "bcd0ecfdb5c0f94fa6a5ec854df0f01193c69e921243c5ae001e1fcd8c547f08"
+        },
+        "src/hooks.js": {
+          "bytes": 8449,
+          "sha256": "6af53e8f84009d70cca6acd6be314331a502407ee0627a616e21c9a0e78acd8a"
+        },
+        "src/lib/glyphs.js": {
+          "bytes": 1151,
+          "sha256": "d390b9a18522a851e1719345cd3aa40c016621653a0bc7a8c92b1a14f1ec0c90"
+        },
+        "src/lib/utils.js": {
+          "bytes": 559,
+          "sha256": "29653e393882cbe4f704327b09f9501f85c8a84b68cbe97499b91c22b985d14c"
+        },
+        "src/main.jsx": {
+          "bytes": 820,
+          "sha256": "d4c0c5dd0267393d090f32a625cd431ac6490d6d940422bfcceb08faaef3c1f3"
+        },
+        "src/styleguide/Guide.jsx": {
+          "bytes": 2266,
+          "sha256": "5a835ee7d7c81779a06695901f02e81a15bf4ae802525f0460fa384f35c95a95"
+        },
+        "src/styleguide/guide.css": {
+          "bytes": 1823,
+          "sha256": "fd461c5d16f9adbe0e2e8bc947fb935458bf9414a5ba65486863080bd031477c"
+        },
+        "src/styleguide/main.jsx": {
+          "bytes": 227,
+          "sha256": "9ab83f717c0277ac23205a34fb18ccee1b063ea0686797d6cd2fb253b5aae3f8"
+        },
+        "src/styleguide/specimens.jsx": {
+          "bytes": 12534,
+          "sha256": "c8f88d057e27492ff7cd7b7436fb2ecb00ebcd7b9bf551da3c83b240d0a51f78"
+        },
+        "src/styles.css": {
+          "bytes": 34525,
+          "sha256": "3b3aec00673a63fd3417ff6c08390ddd02665c70d3f5871df19be3154eb39031"
+        },
+        "src/ui/agent-state.js": {
+          "bytes": 343,
+          "sha256": "38e7052ffbc30e6ec13ab717b06a4e8bab1c4a49f587d86f7b5f987254418452"
+        },
+        "src/ui/bubble.js": {
+          "bytes": 2722,
+          "sha256": "555339cdc2dbc9a425b913b92b845b2db9fa567d64405bf84d04b50146bc4946"
+        },
+        "src/ui/viewport.js": {
+          "bytes": 834,
+          "sha256": "865791fd5e3004aa03ee26cbd3260ef73a57d0e67aba6f0490c480e263f857e9"
+        },
+        "index.html": {
+          "bytes": 1370,
+          "sha256": "e38132c7aedea347f7f88d5e8ce737c7c959d8ce6c2d3b4815e0040c2cdccd9d"
+        },
+        "package.json": {
+          "bytes": 1285,
+          "sha256": "c9bdab34d7a4cf4b0557415f58887623e87496007e0dbf94ea4c13a7f0166818"
+        },
+        "vite.config.js": {
+          "bytes": 3753,
+          "sha256": "189b5eb1b6516febc2b6355aeb19c564e0699482e00f1c6b0f4e21facb11dbac"
+        },
+        "jsconfig.json": {
+          "bytes": 125,
+          "sha256": "946042abe7efe22b63775e0bf76b18d12852de7cfc76ddd7af01d467b3cfea72"
+        },
+        "public/agent-tools.json": {
+          "bytes": 21075,
+          "sha256": "2a5a99039d01c8296299dc7eed003415511965bb0fc770de4fd1f390aaa134ae"
+        },
+        "public/agent.json": {
+          "bytes": 5008,
+          "sha256": "ecc73efea6592c69663f8c8644c0a4f7056d34550dc1a794c0f769ccf969d1f9"
+        },
+        "public/rhl-logo-light.svg": {
+          "bytes": 9803,
+          "sha256": "c517a61a208a20ee1f2c0d6c2d5d6783ca3350ccc27558dca7c2879ed15a3849"
+        },
+        "public/rhl-logo.svg": {
+          "bytes": 9879,
+          "sha256": "be5903929c0ee2c9e0523f34a3e00f8bb96217eb2c2d271265ade664e99444e0"
+        }
+      }
+    },
+    "sourceInputCounts": {
+      "app": 59,
+      "board": 61
+    }
+  },
+  "merge": {
+    "method": "three-way merge of the Ticket 099 demo layer onto the current build source, from the exact source snapshot the 099 demo layer was cut from",
+    "layers": {
+      "base": "missions/m-0185/work/.scratch/basetest/src (round-6 snapshot, 9 Nov 13:53 — 7 minutes before the 099 demo files were written; file list identical to 099 app-src minus the 4 demo-added files)",
+      "ours": "missions/m-0327/work/worker-1/audit/current-build/src (the frozen current build source at code head 513d1c66)",
+      "theirs": "missions/m-0221/work/showcase/app-src/src (Ticket 099 demo layer)"
+    },
+    "portedNewFiles": [
+      "src/data/demo.ts",
+      "src/components/DemoCards.tsx",
+      "src/views/Board.tsx",
+      "src/views/Library.tsx"
+    ],
+    "portedPatches": {
+      "src/data/store.ts": "demo mode flag, demo seed, demo runtime (scripted call, board hand-off, library publish), notice state, demo reply indicator; current demo clock kept",
+      "src/data/fixtures.ts": "MsgCard/CallTurnView types + card field on Msg only (current fixtures copy/clocks kept)",
+      "src/components/Composer.tsx": "demo-agent label (\"scripted demo agent — no live AI\"); current send-disabled behaviour kept",
+      "src/faces/Mobile.tsx": "demo tabs (Chat/Board/Library), demo chip, notice banner, board/library panels, demo composer placement; current title/view-URL/needs-you behaviour kept",
+      "src/views/Thread.tsx": "demo brief title/lines + DemoCards rendering; current mono figures/live region/scroll behaviour kept",
+      "src/styles/app.css": "appended the demo-only CSS block (demo chip/notice/cards/call/job/skill/offer/board/library)",
+      "src/views/Board.tsx": "board iframe at ../board/, hand-off global renamed to window.rhlAgent",
+      "src/views/Library.tsx": "demo library surface + static-publication frozen-snapshot fallback"
+    },
+    "note": "The assignment named missions/m-0185/work/worker-1/build/src as the merge base. That tree is the round-7 delivered source (10 Nov), which post-dates the 099 demo layer (cut 9 Nov); diffing against it would present the round-7 fixes as demo edits and revert them (e.g. the approval card touch-safe settle, the in-place task sign-off control, the demo clock). The exact cut snapshot was recovered at m-0185/.scratch/basetest/src and used as the base; every current-build change is preserved. Deviations are enumerated below, none silently dropped.",
+    "keptFromCurrentNotDemo": [
+      "components/ApprovalCard.tsx — the 099 copy is the round-6 inline card; the current build has round-7 meta-grid + touch-safe settle (no demo-specific content in either)",
+      "views/Tasks.tsx — the 099 copy is round-6; current round-7 in-place sign-off kept",
+      "styles/tokens.css — identical token values (#161616/#1C1C1C); current file kept",
+      "round-6 animation refinements in app.css/Thread.tsx — current build has the later round-7/polish versions"
+    ]
+  },
+  "deBrandDetail": {
+    "requirement": "zero case-insensitive \"Ergon\" in every served byte / page text / video frame",
+    "caseInsensitiveErgonOccurrencesInServedBytes": 0,
+    "perServedFile": {
+      "app/assets/index-DCmS6Iha.js": 0,
+      "app/assets/index-yfHjJhRj.css": 0,
+      "app/favicon.svg": 0,
+      "app/fonts/Geist-Medium.ttf": 0,
+      "app/fonts/Geist-OFL.txt": 0,
+      "app/fonts/Geist-Regular.ttf": 0,
+      "app/fonts/Geist-SemiBold.ttf": 0,
+      "app/fonts/GeistMono-Bold.ttf": 0,
+      "app/fonts/GeistMono-OFL.txt": 0,
+      "app/fonts/GeistMono-Regular.ttf": 0,
+      "app/index.html": 0,
+      "board/agent-tools.json": 0,
+      "board/agent.json": 0,
+      "board/assets/DemoKeys-D5RwAwxA.js": 0,
+      "board/assets/button-PUoX5M7c.js": 0,
+      "board/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2": 0,
+      "board/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2": 0,
+      "board/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2": 0,
+      "board/assets/geist-latin-wght-normal-BgDaEnEv.woff2": 0,
+      "board/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2": 0,
+      "board/assets/main-BH4w1_Y5.js": 0,
+      "board/assets/main-s2yyMUud.css": 0,
+      "board/index.html": 0,
+      "board/rhl-logo-light.svg": 0,
+      "board/rhl-logo.svg": 0
+    },
+    "method": "byte scan of every file under pack/site (the exact bytes W4 publishes) plus the running app page text/DOM and the served HTTP responses on the demo host; the count includes HTML/JS/CSS/JSON/SVG/TXT and fonts",
+    "surfacesChanged": [
+      {
+        "surface": "app index.html <title>",
+        "before": "Ergon — your agent",
+        "after": "RHL warehouse — your agent (demo)"
+      },
+      {
+        "surface": "desktop brand-name span",
+        "before": "Ergon",
+        "after": "Warehouse demo"
+      },
+      {
+        "surface": "desktop/phone document.title suffix",
+        "before": "· Ergon",
+        "after": "· Warehouse demo"
+      },
+      {
+        "surface": "fixture copy (thread)",
+        "before": "read access to the Ergon pilot-week ledger",
+        "after": "read access to the RHL pilot-week ledger"
+      },
+      {
+        "surface": "fixture copy (approval card)",
+        "before": "read access to the Ergon pilot-week ledger.",
+        "after": "read access to the RHL pilot-week ledger."
+      },
+      {
+        "surface": "localStorage state key",
+        "before": "ergon.frontend.v1",
+        "after": "rhl.warehouse-demo.v1"
+      },
+      {
+        "surface": "localStorage clock key",
+        "before": "ergon.frontend.clock",
+        "after": "rhl.warehouse-demo.clock"
+      },
+      {
+        "surface": "demo skill manifest humanUI entry",
+        "before": "ergon://tools/dump-run-intake",
+        "after": "app://tools/dump-run-intake"
+      },
+      {
+        "surface": "app↔board hand-off global (bundle)",
+        "before": "window.ergon.agent.send / type ergon.agent.command",
+        "after": "window.rhlAgent.agent.send / type rhl.agent.command (app and board rebuilt consistently)"
+      },
+      {
+        "surface": "board served agent docs agent.json / agent-tools.json",
+        "before": "ergon_warehouse",
+        "after": "warehouse_board (served demo copies only; the live system schema is untouched)"
+      }
+    ],
+    "boardHandoffDeviation": "The board’s documented in-process hand-off global was renamed (window.ergon → window.rhlAgent) because the global name is served JS and \"ergon\" is a substring of it. The board build and the app’s Board view are renamed together, and the hand-off still carries exactly the typed text once with the same context object."
+  },
+  "demoDataOnly": {
+    "verdict": "demo data only",
+    "fences": [
+      {
+        "fence": "board backend",
+        "evidence": "built with VITE_BACKEND=demo; no Supabase URL/key in the board dist; board src/data/demo.js seeds 14 TEST jobs across lines A–S (demo line F)"
+      },
+      {
+        "fence": "live RHL board never referenced",
+        "evidence": "no \"rhl-warehouse-board.vercel.app\" or any vercel.app URL in any served file or page text"
+      },
+      {
+        "fence": "board rows are test rows",
+        "evidence": "every entry is_test=true; the added job is titled \"TEST Lord's Haulage — dump run DMP-4471\""
+      },
+      {
+        "fence": "library is a separate demo instance",
+        "evidence": "the demo library service runs on its own data dir/port (8751); app labels it \"Demo instance of the company library service\"; the static publication carries a frozen snapshot and says so on the surface"
+      },
+      {
+        "fence": "truck-company call is scripted",
+        "evidence": "DEMO_CALL 6-turn transcript, card labelled \"SIMULATED — no real call\", footer \"Scripted transcript for the demo — no telephony, no real call was placed.\""
+      },
+      {
+        "fence": "no live AI claim",
+        "evidence": "phone composer note reads \"scripted demo agent — no live AI\"; header says \"RHL warehouse · demo data only\""
+      }
+    ],
+    "demoLabels": [
+      "DEMO chip in the phone header",
+      "\"RHL warehouse · demo data only\" subline",
+      "\"Live board · demo data only · not the live RHL board\" board strip",
+      "\"Scripted transcript for the demo — no telephony, no real call was placed.\"",
+      "\"scripted demo agent — no live AI\"",
+      "\"Demo instance of the company library service — separate demo data.\""
+    ]
+  },
+  "serveDetail": {
+    "command": "bash pack/serve/demo-up.sh",
+    "workdir": "pack/",
+    "brings": [
+      "demo library instance on 127.0.0.1:8751 (real library service code, demo data dir pack/.demo-library-data, three demo skills seeded through the real review gate)",
+      "demo host on 0.0.0.0:4966 (app at /app/, board at /board/, demo API, /footage/ when present)"
+    ],
+    "appUrl": "http://127.0.0.1:4966/app/?demo=rhl&reset=1",
+    "boardUrl": "http://127.0.0.1:4966/board/?demo=reset#key=demo-employee",
+    "phoneVmUrl": "http://10.0.2.2:4966/app/?demo=rhl&reset=1 (the phone-VM guest reaches the host loopback at 10.0.2.2)",
+    "healthUrl": "http://127.0.0.1:4966/api/demo/health (served index/asset hashes for binding)",
+    "resets": "?demo=reset on the board rewrites its stored demo data; &reset=1 on the app restores its demo seed; demo-up.sh wipes and re-seeds the demo library data dir",
+    "librarySource": "/home/cayleb/workspace/frontend-reiteration/suite/library (DEMO_LIBRARY_SRC overrides; the real service code, never the live company library on 8737)",
+    "staticPublication": "the same site tree works with no server-side API (proven 8/8): the Library shows the frozen demo-library snapshot labelled \"Static publication: this page carries a frozen snapshot of the demo library\", and Build the skill replays the publication into that snapshot. The local demo host always uses the real library review gate."
+  },
+  "actionScript": {
+    "purpose": "beat-by-beat script for the Ticket 056 phone-VM take (videographer worker 3); one continuous take, start to finish, no cuts",
+    "device": "phone VM emulator-5611, 780x1688 @320 dpi, Chrome (portrait)",
+    "beats": [
+      {
+        "beat": 0,
+        "title": "Open the demo app",
+        "where": "http://10.0.2.2:4966/app/?demo=rhl&reset=1",
+        "action": "open the URL in Chrome",
+        "expect": "phone face: \"Your agent\" + DEMO chip, subline \"needs you · RHL warehouse · demo data only\", morning brief, composer note \"scripted demo agent — no live AI\""
+      },
+      {
+        "beat": 1,
+        "title": "Call for the dump (simulated call)",
+        "where": "Chat",
+        "action": "tap the composer field, type \"Call the truck company about the dump and get a slot tomorrow morning.\", tap Send",
+        "expect": "a SIMULATED call card to Lord's Haulage plays six scripted turns (≈14 s), the card ends \"call ended · 00:14\" and the notice \"DMP-4471 booked · Lord's Haulage · 07:30 tomorrow · 2 pallets banded\" appears; then the job card \"Lord's Haulage — dump run\" with Reference DMP-4471 and Collection Tomorrow 07:30"
+      },
+      {
+        "beat": 2,
+        "title": "Put the job on line F of the board",
+        "where": "Board tab",
+        "action": "tap Board, wait for the board to boot inside the app, tap the board search/command field inside the iframe, type \"add this job to line F\", press Enter",
+        "expect": "notice \"DMP-4471 added to line F — Pulled from the call · full details on the job card\"; the job \"TEST Lord's Haulage — dump run DMP-4471\" appears on line F of the running board; board strip says \"Live board · demo data only · not the live RHL board\""
+      },
+      {
+        "beat": 3,
+        "title": "The agent adapts: save the weekly dump run as a skill",
+        "where": "Chat → offer card",
+        "action": "tap Chat, wait for the offer \"Add “dump-run-intake” to the company library for the warehouse operator role?\", tap \"Build the skill\"",
+        "expect": "the published skill card \"dump-run-intake v0.1.0 · company library · warehouse operator · published\" and the notice \"Skill published\"; the Library tab then shows \"Chosen for your role 3\" with dump-run-intake marked \"new\" beside the two seeded warehouse skills, and \"Shared company-wide 4\""
+      },
+      {
+        "beat": 4,
+        "title": "Stop",
+        "action": "stop recording on the Library surface",
+        "expect": "one continuous take covering beats 0–3; nothing edited out"
+      }
+    ],
+    "provenBy": "evidence/run-through.json (19/19, headless Chromium at the phone viewport on the same stack)"
+  },
+  "evidence": {
+    "runThrough": {
+      "path": "evidence/run-through.json",
+      "sha256": "5a20371c2e4af68a658341b9f1661f97a83c5ed39073fb334ff12b4ddd63bbd7",
+      "bytes": 4416,
+      "result": "PASS 19/19 checks on the running demo stack (http://127.0.0.1:4966)",
+      "screenshots": [
+        {
+          "path": "evidence/run-through/01-phone-start.png",
+          "bytes": 128669,
+          "sha256": "cc0d60bb018938e4432dbf7cb6e448ab8c8f0d8f3f0dfbee9d67d92cd09e722f"
+        },
+        {
+          "path": "evidence/run-through/02-call-started.png",
+          "bytes": 145499,
+          "sha256": "cbaccfd19665b2f90a267dcb57a4cfa79d3a6d7379ec52eb1415022f52bdfb90"
+        },
+        {
+          "path": "evidence/run-through/03-call-done-job-card.png",
+          "bytes": 163641,
+          "sha256": "ba2e35e8be8473256c298d773d7180b2bb800c9045ddc880167f9f55e459a732"
+        },
+        {
+          "path": "evidence/run-through/04-board-before.png",
+          "bytes": 189316,
+          "sha256": "663a14b3f4067854dce7f2b550589dd4c8c535b5abcd59047b87de74544a5f4d"
+        },
+        {
+          "path": "evidence/run-through/05-board-after.png",
+          "bytes": 189487,
+          "sha256": "b88387db0a7ed98fccd5789fbe23a7629abac4c9c54a00d9992db8c9576f974d"
+        },
+        {
+          "path": "evidence/run-through/06-skill-offer.png",
+          "bytes": 151428,
+          "sha256": "078750cf4fa29391f97a3ab0b260abfb76d19bd468467add92bbde1312ccef48"
+        },
+        {
+          "path": "evidence/run-through/07-skill-published.png",
+          "bytes": 103863,
+          "sha256": "12725d6398607de23da7c7b16fa845a84db01fa39b704ff5ca456030d1dfcad9"
+        },
+        {
+          "path": "evidence/run-through/08-library.png",
+          "bytes": 154247,
+          "sha256": "43a805dcf3fafe9916b1cd46aca92f60793364f768fddac786ff0abd553c5335"
+        }
+      ]
+    },
+    "staticPublicationShape": {
+      "path": "evidence/static/static-check.json",
+      "sha256": "00445695c094144d0fd1a294e631306a6b6072c861f42927361664780d505278",
+      "bytes": 979,
+      "result": "PASS 8/8 checks when the same site tree is served by a plain static file server (no demo API): Library frozen-snapshot fallback + beat-3 replay proven",
+      "screenshot": {
+        "path": "evidence/static/library-static.png",
+        "sha256": "bf18d1ca5526791a3dd2668917d38aa8bba5ac7a1fcfe252db347849aa4638ee"
+      }
+    }
+  },
+  "selfCheck": {
+    "commands": [
+      "bash pack/serve/demo-up.sh",
+      "node tools/run-through.mjs",
+      "node tools/static-check.mjs"
+    ],
+    "runThrough": "PASS 19/19 on the running stack (call → board line F → library publish; demo labels; no live-board URL; TEST rows only; no console errors)",
+    "staticPublication": "PASS 8/8 with the same site tree on a plain static file server",
+    "deBrandScan": "0 case-insensitive \"Ergon\" occurrences in 25 served files",
+    "note": "the checker must still watch W3’s take and re-run a flow on the published build (Ticket 056); this manifest binds the bytes, the serve command and the proven flow."
+  },
+  "deviations": [
+    "D1 merge base: used m-0185/.scratch/basetest/src (9 Nov 13:53 round-6 snapshot) as the three-way base instead of missions/m-0185/work/worker-1/build/src — why: build/src is the round-7 tree delivered 10 Nov, after the 099 demo layer was cut; merging from it would treat round-7 fixes as demo edits and revert them. The basetest snapshot is the exact tree the demo layer was cut from (identical file list minus the 4 demo files). Every current-build change is kept.",
+    "D2 demo files with no demo content: the 099 copies of components/ApprovalCard.tsx, views/Tasks.tsx and styles/tokens.css were not applied; the current build versions are kept — why: those diffs are round-6 source state, not demo-layer changes (no DEMO/RHL/board/library references in them); applying them would revert round-7/polish fixes. app.css/Thread.tsx port only the demo-specific hunks on top of the current files.",
+    "D3 board hand-off global: renamed window.ergon → window.rhlAgent and message type ergon.agent.command → rhl.agent.command in the app and the rebuilt board — why: the global name is served JavaScript and contains \"ergon\"; the zero-occurrence requirement outranks keeping the documented global name in a demo build. Both sides renamed together; the hand-off semantics are unchanged.",
+    "D4 board served agent docs: agent.json/agent-tools.json in the served board carry \"warehouse_board\" where they carried \"ergon_warehouse\" — why: same zero-occurrence requirement on served bytes; these files describe the live Supabase surface, which this demo build never contacts. The live schema is untouched.",
+    "D5 library static fallback: the Library view gains a frozen-snapshot fallback (and a satisfying replay of Build the skill) for the static publication — why: the public host (GitHub Pages) has no demo API; without this the Library beat shows an error on the published pack. The local demo host still exercises the real library review gate — video evidence is taken on it. The fallback is labelled on the surface (\"Static publication: this page carries a frozen snapshot of the demo library\").",
+    "D6 site layout: app is served at /app/ and the board at /board/ (099 served the app at the root); the board iframe src is ../board/ — why: the publisher needs a page at the site root; a subpath tree with relative roots is also what GitHub Pages requires. No absolute /assets or /board refs remain.",
+    "D7 board source: board rebuilt from missions/m-0240/work/build/board-src (per the assignment), with base \"./\" and de-brand patches added — why: subpath portability + zero served \"ergon\"; board function/data unchanged (VITE_BACKEND=demo, 14 TEST rows).",
+    "D8 demo clock vs brief date: the demo brief keeps its \"Morning brief — Mon 9 Nov\" demo copy while the app clock seeds at the current build’s demo clock (Sun 8 Nov 12:00), so thread turns show 12:00 — why: both are demo content from the 099/108 demo data; the current build’s one-clock fidelity is kept rather than reverting to the older fixtures. Cosmetic only; no brand/fence/AI claim affected.",
+    "D9 page not generated: pack/site has no index.html yet — why: the public page (and its walkthrough player) is the publisher’s deliverable (coordination rule: generated page named separately, not a delivered-dist file); the demo host falls back to /app/?demo=rhl until the publisher writes it."
+  ],
+  "subpathPortability": {
+    "viteBase": "./",
+    "rootAbsoluteRefsFound": [],
+    "verdict": "PASS — no root-absolute src/href/url()/fetch()/import() refs in any served file"
+  }
+}

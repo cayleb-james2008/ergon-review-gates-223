@@ -1,0 +1,19 @@
+/* retoken.css — flat-token translation: the REAL Kitchen theme (Radix grayscale,
+   src/vendor/kitchen/styles/) is re-mapped onto the Ergon WHITE reference product tokens (--eg-*) at the CSS-var
+   level. No vendored component byte changes. Every value below is derived from --eg-* tokens
+   (steps 1/3/5/6/9/10/12 are the product tokens themselves; intermediates are color-mix of base→ink) —
+   no raw colour literal. */
+:root {
+  --gray-1: var(--eg-base);
+  --gray-2: color-mix(in srgb, var(--eg-base) 88%, var(--eg-ink));
+  --gray-3: var(--eg-panel);
+  --gray-4: color-mix(in srgb, var(--eg-panel) 80%, var(--eg-raise));
+  --gray-5: var(--eg-raise);
+  --gray-6: var(--eg-hover);
+  --gray-7: color-mix(in srgb, var(--eg-hover) 70%, var(--eg-line-strong));
+  --gray-8: color-mix(in srgb, var(--eg-line-strong) 70%, var(--eg-field-line));
+  --gray-9: var(--eg-field-line);
+  --gray-10: var(--eg-muted);
+  --gray-11: color-mix(in srgb, var(--eg-muted) 55%, var(--eg-ink));
+  --gray-12: var(--eg-ink);
+}

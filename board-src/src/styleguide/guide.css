@@ -1,0 +1,27 @@
+/* Style guide layout only. Every colour is a token. */
+@layer components {
+  .guide-body { overflow: auto; height: auto; }
+  .guide { max-width: 1280px; margin: 0 auto; padding: 24px; display: grid; gap: 32px; }
+  .guide h1 { margin: 0; font-size: var(--text-marker); line-height: 1.1; font-weight: 600; }
+  .guide h2 { margin: 0; font-size: var(--text-title); line-height: 1.5; font-weight: 600; }
+  .guide p { margin: 0; color: var(--muted); }
+  .guide-section { display: grid; gap: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .guide-head { display: grid; gap: 4px; }
+  .guide-themes, .guide-row { display: grid; grid-template-columns: 144px 1fr 1fr; gap: 16px; align-items: start; }
+  .guide-themes span, .guide-label { font-size: var(--text-label); line-height: 1.5; color: var(--muted); padding-top: 16px; }
+  .cell { position: relative; transform: translateZ(0); overflow: hidden; min-width: 0; padding: 16px; min-height: 72px; border: 1px solid var(--line); border-radius: var(--r-panel); display: flex; align-items: center; }
+  .cell > [data-specimen] { width: 100%; }
+  .cell.tall { min-height: 360px; align-items: flex-start; }
+  .guide-jobs { height: 64px; }
+  .guide-row-fit { height: 56px; }
+  .guide-missing { color: var(--danger); font-weight: 600; }
+  .guide-form { display: grid; gap: 8px; }
+  .guide-actions { display: flex; align-items: center; gap: 8px; }
+  .guide-anchor { margin-bottom: 8px; padding: 8px; border: 1px solid var(--line-strong); border-radius: var(--r-control); font-size: var(--text-body-sm); }
+  .guide-legend { margin: 0; }
+  .guide-legend::before { display: none; }
+  .guide-note, .guide-version { position: relative; height: 56px; }
+  .guide-version { height: 24px; }
+  .guide-version .version { right: auto; left: 0; }
+  .cell .board-msg { margin-top: 0; }
+}

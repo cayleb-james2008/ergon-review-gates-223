@@ -1,0 +1,17 @@
+{
+  "name": "key-notice",
+  "title": "Key notice",
+  "file": "src/components/KeyNotice.jsx",
+  "base": "custom",
+  "uses": [
+    "raised",
+    "ink"
+  ],
+  "states": [
+    "none",
+    "expired",
+    "invalid"
+  ],
+  "check": {},
+  "notes": "In the job panel, in place of saving, when there is no usable key: one plain sentence, no input. Demo builds add three quiet buttons that set a public test key; the production build contains none of it."
+}

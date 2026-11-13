@@ -1,0 +1,28 @@
+{
+  "name": "line-label",
+  "title": "Line letter (bay marker)",
+  "file": "src/components/Board.jsx",
+  "base": "custom, the product signature",
+  "uses": [
+    "marker-bg",
+    "marker-fg",
+    "muted",
+    "line"
+  ],
+  "states": [
+    "occupied",
+    "tally",
+    "empty",
+    "loading",
+    "dim"
+  ],
+  "check": {
+    "empty": "background-color",
+    "loading": "background-color",
+    "dim": "background-color"
+  },
+  "notes": "Painted bay marker, inset like the cards beside it: solid for a line with jobs, bare floor for an empty, loading or non-matching line. 22px, 64px column on desktop. Occupied lines add a tally in the marker, jobs ready over jobs on the line (real data), drawn by CSS.",
+  "also": [
+    "src/components/BayMarker.jsx"
+  ]
+}

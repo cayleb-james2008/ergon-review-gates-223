@@ -1,0 +1,5 @@
+{ "name": "dialog", "title": "Dialog", "file": "src/components/ui/dialog.jsx", "base": "shadcn/ui Dialog on Radix Dialog",
+  "uses": ["floating", "line-strong", "scrim", "ink", "danger"],
+  "states": ["open", "loading", "error"],
+  "check": {},
+  "notes": "Flat translucent scrim, no blur. Focus lands on the first field. Escape and Cancel close it." }

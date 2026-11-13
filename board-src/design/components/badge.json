@@ -1,0 +1,42 @@
+{
+  "name": "badge",
+  "title": "Status badge",
+  "file": "src/components/StatusBadge.jsx",
+  "base": "shadcn/ui Badge, one glyph shape per status",
+  "uses": [
+    "open-bg",
+    "open-fg",
+    "hold-bg",
+    "hold-fg",
+    "ready-bg",
+    "ready-fg",
+    "done-bg",
+    "done-fg",
+    "field-line",
+    "ring"
+  ],
+  "states": [
+    "open",
+    "hold",
+    "ready",
+    "done",
+    "editable",
+    "editable-hover",
+    "editable-focus",
+    "editable-disabled"
+  ],
+  "check": {
+    "editable-hover": "outline-style",
+    "editable-focus": "outline-style",
+    "editable-disabled": "opacity"
+  },
+  "notes": "Word plus glyph (circle, pause in circle, check in circle, bare check). Colour is never the only cue. Editable badges are Radix Select triggers. They draw no focus ring themselves: the job card that holds one carries it (round 6), so the focus specimen sits inside a card.",
+  "against": {
+    "editable-hover": "editable",
+    "editable-focus": "editable",
+    "editable-disabled": "editable"
+  },
+  "also": [
+    "src/components/ui/badge.jsx"
+  ]
+}

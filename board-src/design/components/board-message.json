@@ -1,0 +1,17 @@
+{
+  "name": "board-message",
+  "title": "Board message",
+  "file": "src/components/Board.jsx",
+  "base": "custom",
+  "uses": [
+    "ink",
+    "muted"
+  ],
+  "states": [
+    "error",
+    "not-set-up",
+    "no-lines"
+  ],
+  "check": {},
+  "notes": "What the board area says when there is no board: the first load failed (with Retry), the backend is not set up, or no lines exist yet. One title, at most one sentence, centred, the title at the same step as the page heading. Each fact is said once; the header status line stays empty while this shows."
+}

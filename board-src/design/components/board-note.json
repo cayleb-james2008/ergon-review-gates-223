@@ -1,0 +1,16 @@
+{
+  "name": "board-note",
+  "title": "No-match note",
+  "file": "src/components/Board.jsx",
+  "base": "custom",
+  "uses": [
+    "floating",
+    "line-strong",
+    "ink"
+  ],
+  "states": [
+    "default"
+  ],
+  "check": {},
+  "notes": "No jobs match. A small floating note centred over the dimmed board when a search matches nothing. It does not hide the board and does not take focus; role status announces it."
+}

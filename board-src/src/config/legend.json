@@ -1,0 +1,11 @@
+{
+  "$comment": "Initials colour coding (the real board's sticker system) and the legend shown on the board. initials -> hue token; an alias resolves to its target (JAN is JA). Initials not listed here are unconfirmed: they show as themselves in a neutral tone, never a guessed identity. Person names are not shown, by owner ruling (Cayleb, 3 Nov 2026): the legend is initials and colours only, now and as a later default. Do not add a name to an entry.",
+  "initials": {
+    "JA": { "hue": "blue" },
+    "JS": { "hue": "pink" },
+    "JG": { "hue": "orange" },
+    "AK": { "hue": "green" },
+    "LB": { "hue": "purple" }
+  },
+  "aliases": { "JAN": "JA" }
+}

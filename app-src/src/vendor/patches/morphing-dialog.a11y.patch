@@ -1,0 +1,73 @@
+--- sources/motion-primitives/components/core/morphing-dialog.tsx	2026-11-07 14:32:05.959873852 -0500
++++ build/src/vendor/mp/morphing-dialog.tsx	2026-11-10 00:53:06.595133724 -0500
+@@ -88,7 +88,10 @@
+   children: React.ReactNode;
+   className?: string;
+   style?: React.CSSProperties;
+-  triggerRef?: React.RefObject<HTMLButtonElement>;
++  triggerRef?: React.RefObject<HTMLButtonElement | null>;
++  /** LOCAL A11Y PATCH (Ergon round 7): the upstream part hardcodes aria-label="Open dialog <id>";
++   *  callers may pass the control's real name here. Default keeps upstream behaviour. */
++  triggerLabel?: string;
+ };
+ 
+ function MorphingDialogTrigger({
+@@ -96,8 +99,9 @@
+   className,
+   style,
+   triggerRef,
++  triggerLabel,
+ }: MorphingDialogTriggerProps) {
+-  const { setIsOpen, isOpen, uniqueId } = useMorphingDialog();
++  const { setIsOpen, isOpen, uniqueId, triggerRef: contextTriggerRef } = useMorphingDialog();
+ 
+   const handleClick = useCallback(() => {
+     setIsOpen(!isOpen);
+@@ -115,7 +119,13 @@
+ 
+   return (
+     <motion.button
+-      ref={triggerRef}
++      ref={(node) => {
++        // LOCAL A11Y PATCH (Ergon round 7): the upstream part never attached the context trigger
++        // ref, so closing the dialog could not return focus. Attach context (focus return) and the
++        // caller's ref when it passes one.
++        contextTriggerRef.current = node;
++        if (triggerRef) triggerRef.current = node;
++      }}
+       layoutId={`dialog-${uniqueId}`}
+       className={cn('relative cursor-pointer', className)}
+       onClick={handleClick}
+@@ -124,7 +134,7 @@
+       aria-haspopup='dialog'
+       aria-expanded={isOpen}
+       aria-controls={`motion-ui-morphing-dialog-content-${uniqueId}`}
+-      aria-label={`Open dialog ${uniqueId}`}
++      aria-label={triggerLabel ?? `Open dialog ${uniqueId}`}
+     >
+       {children}
+     </motion.button>
+@@ -206,6 +216,7 @@
+   return (
+     <motion.div
+       ref={containerRef}
++      id={`motion-ui-morphing-dialog-content-${uniqueId}`}
+       layoutId={`dialog-${uniqueId}`}
+       className={cn('overflow-hidden', className)}
+       style={style}
+@@ -272,6 +283,7 @@
+ 
+   return (
+     <motion.div
++      id={`motion-ui-morphing-dialog-title-${uniqueId}`}
+       layoutId={`dialog-title-container-${uniqueId}`}
+       className={className}
+       style={style}
+@@ -297,6 +309,7 @@
+ 
+   return (
+     <motion.div
++      id={`motion-ui-morphing-dialog-description-${uniqueId}`}
+       layoutId={`dialog-subtitle-container-${uniqueId}`}
+       className={className}
+       style={style}

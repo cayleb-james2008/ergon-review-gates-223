@@ -1,0 +1,23 @@
+{
+  "name": "bubble",
+  "title": "Command bubble",
+  "file": "src/components/Bubble.jsx",
+  "base": "custom (drag and keyboard move), Radix Popover and Tooltip inside",
+  "uses": [
+    "floating",
+    "line-strong",
+    "ring",
+    "field",
+    "field-line"
+  ],
+  "states": [
+    "idle",
+    "needs-you",
+    "no-key",
+    "disabled"
+  ],
+  "check": {
+    "needs-you": "border-top-color"
+  },
+  "notes": "Search, the key status chip, Add job. Draggable, arrow keys move it (Shift moves 48 px). The grip carries a flat state dot. No Edit or Lock button and no passcode: a key arrives from the person's agent."
+}

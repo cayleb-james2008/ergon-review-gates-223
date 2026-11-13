@@ -1,0 +1,14 @@
+{
+  "name": "version-label",
+  "title": "Version label",
+  "file": "src/components/Header.jsx",
+  "base": "custom",
+  "uses": [
+    "muted"
+  ],
+  "states": [
+    "default"
+  ],
+  "check": {},
+  "notes": "Version <build id> in the page margin below the last line, 12px muted, tabular. It costs no row height. Hidden on phones and on paper. The id is also data-version on the board and the logo's title."
+}

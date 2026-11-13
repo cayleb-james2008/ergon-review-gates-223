@@ -1,0 +1,28 @@
+{
+  "name": "job-card-compact",
+  "title": "Job card, compact",
+  "file": "src/components/Job.jsx",
+  "base": "custom",
+  "uses": [
+    "raised",
+    "hover",
+    "floating",
+    "ink",
+    "muted"
+  ],
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "hit",
+    "dim",
+    "disabled"
+  ],
+  "against": {},
+  "check": {
+    "hover": "background-color",
+    "hit": "outline-style",
+    "dim": "background-color"
+  },
+  "notes": "The dense form of the job card, chosen per line by fit (src/core/density.js): a line whose jobs would not fit at normal card width switches every one of its cards to this. One short line: customer with an ellipsis, the status glyph (the word stays in the accessible name and the title), the initials chip with its tint. The note and the full text are on the card's title and in the details. 12px text at every screen size. Cards wrap to a second line inside the same row height; on touch they keep the full row height and the line swipes. The whole card opens the details. Disabled is the status trigger without a key or offline."
+}

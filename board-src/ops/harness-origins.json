@@ -1,0 +1,4 @@
+{
+  "$comment": "The ONE list of origins allowed to embed this board in a frame. Exact https origins only (scheme://host[:port]), no paths, no wildcards, never '*'. It drives two things from this single file: the Content-Security-Policy frame-ancestors header (node ops/headers.mjs writes it into vercel.json) and the build's allow-list for posting the bubble's command text to the embedding parent. Empty = nobody may frame the board (frame-ancestors 'self'), and nothing is ever posted to a parent. The real Ergon shell domains are added here when they are supplied.",
+  "origins": []
+}
